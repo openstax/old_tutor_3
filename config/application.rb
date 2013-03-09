@@ -60,3 +60,7 @@ module Tutor
     config.assets.version = '1.0'
   end
 end
+
+def database_for(env)
+  (ENV['DB'] == 'mysql') ? 'tutor_' + env : 'db/' + env + '.sqlite3'
+end
