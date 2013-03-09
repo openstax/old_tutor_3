@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Tutor::Application.load_tasks
+Ost::Application.load_tasks

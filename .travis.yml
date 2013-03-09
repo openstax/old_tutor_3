@@ -22,4 +22,4 @@ branches:
     - master
 before_script:
   - gem install mysql2
-  - mysql -e 'create database tutor_test'
+  - mysql -e 'create database ost_test'

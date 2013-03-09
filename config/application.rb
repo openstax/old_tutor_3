@@ -9,7 +9,7 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
-module Tutor
+module Ost
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -62,5 +62,5 @@ module Tutor
 end
 
 def database_for(env)
-  (ENV['DB'] == 'mysql') ? 'tutor_' + env : 'db/' + env + '.sqlite3'
+  (ENV['DB'] == 'mysql') ? 'ost_' + env : 'db/' + env + '.sqlite3'
 end
