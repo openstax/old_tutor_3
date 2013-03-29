@@ -1,6 +1,8 @@
 Ost::Application.routes.draw do
   root :to => "home_page#index"
-  
+
+  get "dashboard_page" => "dashboard_page#index"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

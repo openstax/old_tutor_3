@@ -14,7 +14,7 @@ module ApplicationTopNavHelper
             :locals   => {  :target_text            => "DASHBOARD",
                             :target_image           => "",
                             :target_id              => "top-nav-dashboard-link",
-                            :target_path            => "#",
+                            :target_path            => dashboard_page_path,
                             :target_current_symbol  => :top_nav_dashboard_current }
   end
 
