@@ -16,7 +16,7 @@
 /tmp/**/*
 
 # Ignore OS X's Desktop Service Store files
-# *.DS_Store
+*.DS_Store
 
 config/developer_settings.yml
 config/secret_settings.yml
