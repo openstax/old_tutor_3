@@ -1,116 +1,112 @@
 @import "common";
+@import "application_layout";
 
-$nav_bar_height: $application_header_height;
-
-.top-nav-logo  {
-  border:       0 none;
-  opacity:      1;
-  float:      left;
-  background: image-url("ost_logo_beta.png") no-repeat transparent;
-  margin-top:  11px;
-  height:      49px;
-  width:      250px;
+#top-nav-frame {
+  height: $application_top_nav_height;
+  background-color: $background_color;
+}
+#top-nav-frame.home-page {
+  background-color: $ost_light_beige;
 }
 
-#top-nav {
-  height: $application_top_nav_height;
-  background-color: $background-color;
-
-  margin-left:  -$application_edge_distance;
-  margin-right: -$application_edge_distance;
+#top-nav-content {
   padding-left:  $application_edge_distance;
   padding-right: $application_edge_distance;
+}
+
+#top-nav-logo-link  {
+  background: image-url("ost_logo_beta.png") no-repeat transparent;
+  $image_height:  29px;
+  $image_width:  204px;
+
+  float:      left;
+  height:     $image_height;
+  width:      $image_width;
+  margin-top: ($application_top_nav_height - $image_height)/2;
+}
+
+#top-nav-links {
 
   ul {
-    display:      inline;
-    padding-left: 0px;
-    margin-top:   0px;
-    float:        right;
-     
-    li {
-      display:         inline;
-      list-style-type: none;
-      margin:          0px 0px;
-      height:          $application_top_nav_height;
-      text-align:      center;
-    
-      a {
-        color: #000;
-        text-decoration: none;
-        width: 100%;
-        
-        &:hover {
-          color:white;
-        }
-        
-        span {
-          float:left;
-          font-size: 10px;
-          font-family: arial, helvetica, sans-serif;
-          
-          $padding-top: 20px;
-          padding-top: $padding-top;
-          padding-left: 9px;
-          padding-right: 9px;
-          
-          height: $application_top_nav_height - $padding-top;
-          &:hover {
-            background-color: $ost_hot_blue;
-          }
-          
-          .down-arrow {
-            display:none;
-          }
-          
-          em {
-            font-style:normal;
-          }
-        }
-      }
+    float: right;
+
+    padding:  0px 0px  0px 0px;
+    margin:   0px 0px 10px 0px;
+  }
+
+  li {
+    display: inline;
+
+    height:  $application_top_nav_height;
+    margin:  0px 0px;
+
+    list-style-type: none;
+    text-align:      center;
+  }
+
+  a {
+    color:           black;
+    text-decoration: none;
+
+    &:hover {
+      color:            white;
+      background-color: $ost_hot_blue;
+    }
+  }
+
+  .top-nav-link {
+    float: left;
+
+    display:  inline; 
+    position: relative;
+
+    padding-left:  9px;
+    padding-right: 9px;
+
+    font-size:   10px;
+    font-family: arial, helvetica, sans-serif;
+    line-height: $application_top_nav_height;
+
+    &:hover {
+      background-color: $ost_hot_blue;
     }
   }
 
   #top-nav-help-link {
+    color:            white;
     background-color: $os_yellow;
-    color: white;
+
     &:hover {
       background-color: $ost_hot_blue;
     }
   }
 
   .current {
+    color:            white;
     background-color: $ost_hot_blue ! important;
-    color: white;
-    position: absolute;
 
     em {
-       background: image-url("pointer.png") no-repeat top center;
        position: absolute;
-       height:62px;
-       width: 100%;
-       top: 3px;
-       left: 0%;
-       font-style: normal;
+       top:      3px;
+       left:     0px;
+
+       height:    62px;
+       width:    100%;
+
+       background: image-url("pointer.png") no-repeat top center;
+
        z-index: 2;
     }
-  }
-
-  .top-nav-link {
-    display:  inline; 
-    position: relative;
   }
 
   .help-link-icon {
     height:         12px;
     width:          12px;
-    vertical-align: middle; 
     margin-top:     -2px; 
     padding-left:    5px;
+
+    vertical-align: middle; 
   }
 
-}
-
-#top-nav.home-page {
-  background-color: $ost_light_beige;
 }
 

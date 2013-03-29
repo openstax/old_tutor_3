@@ -1,7 +1,4 @@
 @import "application_layout";
 
 #application-header {
-  @include header-main-footer-common;
-
-  height: $application_header_height;
 }
