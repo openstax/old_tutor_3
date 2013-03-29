@@ -1,0 +1,10 @@
+@import "application_layout";
+
+#application-body a {
+  font-weight: normal;
+}
+
+#application-body {
+  @include header-main-footer-common;
+  margin-bottom: -15px;
+}

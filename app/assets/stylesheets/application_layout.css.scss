@@ -1,0 +1,31 @@
+@import "common";
+
+body { 
+  background-color: $background_color;
+  color:            $os_gray;
+  margin-top:       0px;
+}
+
+body, p, ol, ul, td, a {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size:   13px;
+}
+
+#application-container {
+  width: $application_master_width;
+  margin-left:  auto;
+  margin-right: auto;
+  font-weight: normal;
+  font-color:  #000;
+  margin-top:  0px;
+}
+
+.top_level_container {}
+
+@mixin header-main-footer-common {
+  padding-left:   $application_edge_distance;
+  padding-right:  $application_edge_distance;
+
+  $top_nav_bottom_margin: -10px;
+}
+

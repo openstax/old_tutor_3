@@ -1,0 +1,115 @@
+@import "application_layout";
+
+#application-account-bar {
+  @include header-main-footer-common;
+
+  height:           $application_account_bar_height;
+  padding-top:      17px;
+  background-color: $ost_light_beige;
+
+  #account-bar-content {
+
+    height: $application_account_bar_height;
+    padding-top: 10px;
+    float: right;
+
+    @mixin account-bar-link-common {
+      font-size:   11px;
+      font-family: verdana, arial, helvetica, sans-serif;
+      font-weight: normal;
+
+      &:hover { 
+        color: $ost_hot_blue;
+        text-decoration:none;
+      }      
+    }
+
+    a {
+      @include account-bar-link-common;
+      color: $ost_account_gray;
+    }
+    a.transparent {
+      @include account-bar-link-common;
+      color: white;
+    } 
+
+    #facebook-link {
+      margin-left: 16px;
+    }
+    #twitter-link {
+    }
+
+    #facebook-icon {
+      height: 24px;
+      width:  23px;
+    }
+
+    #twitter-icon {
+      height: 24px;
+      width:  23px;
+    }
+
+    img {
+      vertical-align: middle;
+      padding: 0px 3px 2px 3px;
+    }
+
+   .vertical-bar {
+      @include vertical-bar-common;
+      border-left-color: $ost_account_gray;
+      width:      1px; 
+      height:    11px;
+      font-size: 11px;
+    }
+    .vertical-bar.transparent {
+      border-left-color: white;
+    } 
+  }
+}
+
+#application-account-bar.transparent {
+  background-color: transparent;
+}
+
+
+.account-info {
+  margin-left: -$application_edge_distance;
+  background-color: $ost_light_beige;
+
+  a {
+    color: $ost_account_gray;
+  }
+}
+
+// .account-info {
+//   @include header-main-footer-common;
+//   margin-left: -$application_edge_distance;
+
+//   font-size: 11px;
+//   color: white;
+//   font-family: arial, helvetica, sans-serif;
+//   padding-top: 27px;
+//   height: 44px;
+//   width: 100%;
+//   margin-bottom: 35px;
+
+//   div {
+//     float: right;
+//   }
+
+//   img {
+//     vertical-align: middle;
+//     padding: 0px 3px 2px 3px;
+//   }
+
+//   a {
+//     font-size: 11px;
+//     color: white;
+//     &:hover { color: $ost_hot_blue; text-decoration:none; }
+//   }
+
+//   .vertical-bar {
+//     @include vertical-bar-common;
+//     border-left-color: white;
+//   }
+// }

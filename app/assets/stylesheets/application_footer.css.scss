@@ -1,0 +1,36 @@
+@import "application_layout";
+
+#application-footer {
+  @include header-main-footer-common;
+
+  background: image-url("footer_flare.png") top right no-repeat;
+  height:           77px;
+  background-color: #7d7d7d;
+  color:            #dddddd;
+  font-size:        10px;
+  font-family:      verdana, arial, helvetica, sans-serif;
+  line-height:      14px;
+  
+  a {
+    font-size:        10px;
+    text-decoration:  none;
+    color:            #dddddd;
+
+    &:hover {
+      color: $ost_hot_blue;
+    }
+  }
+
+  #footer-copyright {
+    padding-top: 24px;
+  }
+
+  #footer-rice-logo {
+    float: right;
+  }
+
+  #footer-rice-logo-image {
+    padding-top:  21px;
+    float:        right;
+  }
+}

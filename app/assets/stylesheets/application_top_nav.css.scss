@@ -1,0 +1,116 @@
+@import "common";
+
+$nav_bar_height: $application_header_height;
+
+.top-nav-logo  {
+  border:       0 none;
+  opacity:      1;
+  float:      left;
+  background: image-url("ost_logo_beta.png") no-repeat transparent;
+  margin-top:  11px;
+  height:      49px;
+  width:      250px;
+}
+
+#top-nav {
+  height: $application_top_nav_height;
+  background-color: $background-color;
+
+  margin-left:  -$application_edge_distance;
+  margin-right: -$application_edge_distance;
+  padding-left:  $application_edge_distance;
+  padding-right: $application_edge_distance;
+
+  ul {
+    display:      inline;
+    padding-left: 0px;
+    margin-top:   0px;
+    float:        right;
+     
+    li {
+      display:         inline;
+      list-style-type: none;
+      margin:          0px 0px;
+      height:          $application_top_nav_height;
+      text-align:      center;
+    
+      a {
+        color: #000;
+        text-decoration: none;
+        width: 100%;
+        
+        &:hover {
+          color:white;
+        }
+        
+        span {
+          float:left;
+          font-size: 10px;
+          font-family: arial, helvetica, sans-serif;
+          
+          $padding-top: 20px;
+          padding-top: $padding-top;
+          padding-left: 9px;
+          padding-right: 9px;
+          
+          height: $application_top_nav_height - $padding-top;
+          &:hover {
+            background-color: $ost_hot_blue;
+          }
+          
+          .down-arrow {
+            display:none;
+          }
+          
+          em {
+            font-style:normal;
+          }
+        }
+      }
+    }
+  }
+
+  #top-nav-help-link {
+    background-color: $os_yellow;
+    color: white;
+    &:hover {
+      background-color: $ost_hot_blue;
+    }
+  }
+
+  .current {
+    background-color: $ost_hot_blue ! important;
+    color: white;
+    position: absolute;
+
+    em {
+       background: image-url("pointer.png") no-repeat top center;
+       position: absolute;
+       height:62px;
+       width: 100%;
+       top: 3px;
+       left: 0%;
+       font-style: normal;
+       z-index: 2;
+    }
+  }
+
+  .top-nav-link {
+    display:  inline; 
+    position: relative;
+  }
+
+  .help-link-icon {
+    height:         12px;
+    width:          12px;
+    vertical-align: middle; 
+    margin-top:     -2px; 
+    padding-left:    5px;
+  }
+
+}
+
+#top-nav.home-page {
+  background-color: $ost_light_beige;
+}
+
