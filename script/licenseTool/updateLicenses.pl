@@ -1,0 +1,213 @@
+#!/usr/bin/perl -w
+
+# Copyright 2011-2013 Rice University. Licensed under the Affero General Public 
+# License version 3 or later.  See the COPYRIGHT file for details.
+
+BEGIN
+{
+	$WORKING_DIR = `pwd -P`;
+	chomp $WORKING_DIR;
+	$WORKING_DIR =~ s!/+$!!g;
+	$WORKING_DIR .= "/";
+
+	$SCRIPT_DIR = $WORKING_DIR;
+	if ($0 =~ m!^\.!) {
+		$SCRIPT_DIR = $WORKING_DIR . $0;
+	}
+	elsif ($0 =~ m!^/!) {
+		$SCRIPT_DIR = $0;
+	}
+
+	$SCRIPT_DIR =~ m!(^.*/)!;
+	$SCRIPT_DIR = $1;
+
+	$SCRIPT_NAME = $0;
+	if ($0 =~ m!^(.*/)(.+)$!) {
+		$SCRIPT_NAME = $2;
+	}
+	
+	# print STDOUT ("\$0         = $0\n");
+	# print STDOUT ("WORKING_DIR = $WORKING_DIR\n");
+	# print STDOUT ("SCRIPT_DIR  = $SCRIPT_DIR\n");
+	# print STDOUT ("SCRIPT_NAME = $SCRIPT_NAME\n");
+	
+	push(@INC, $SCRIPT_DIR);
+}
+
+use Module::Load;
+
+my $setup = parseArgs(@ARGV);
+
+readLicenseFile($setup);
+importLicensers($setup);
+readPatternsFile($setup);
+processFiles($setup);
+
+sub readLicenseFile
+{
+	my ($setup) = @_;
+	
+	die ("\n\nERROR: could not open license file ($setup->{licenseFilename}) [$!]\n\n")
+	  if !open(IN, $setup->{licenseFilename});
+	my @licenseLines = <IN>;
+	close(IN);
+
+	$setup->{licenseLines} = \@licenseLines;
+	
+	foreach (@licenseLines) {
+		return
+			if ($_ =~ m/\S/);
+	}
+	
+	die ("\n\nERROR: license file contains no non-whitespace text\n\n")
+}
+
+sub importLicensers
+{
+	my ($setup) = @_;
+	
+	opendir(DIR, $SCRIPT_DIR);
+	my @filenames = readdir(DIR);
+	closedir(DIR);
+	
+	foreach (@filenames)
+	{
+		my $curFilename = $_;
+
+		next
+			if ($curFilename !~ m/^([a-zA-Z]+)Licenser\.pm$/);
+		my $licenserName = $1;
+		my $className = $curFilename;
+		$className =~ s/\.pm$//;
+
+		print STDOUT ("loading $className as $licenserName\n");
+
+		load $className;
+		my $licenser = new $className;
+		if ($licenser->isa("BaseLicenser") and ${licenser}->is_concrete()) {
+			print STDOUT ("  ...and adding it as a concrete licenser\n");
+			$setup->{licenserByName}->{$licenserName} = $licenser
+		}
+	}
+}
+
+sub readPatternsFile
+{
+	my ($setup) = @_;
+
+	die ("\n\nERROR: could not open regex file ($setup->{patternFilename}) [$!]\n\n")
+	  if !open(IN, $setup->{patternFilename});
+	my @regexLines = <IN>;
+	close(IN);
+
+	$setup->{licenserByPattern} = {};
+	$setup->{patternsArray} = [];
+
+	foreach (@regexLines) {
+		my $curLine = $_;
+
+		$curLine =~ s/#.*//;
+		$curLine =~ s/^\s+|\s+$//g;
+		next
+			if $curLine eq "";
+
+		die ("\n\nERROR: invalid pattern line in $setup->{patternFilename} ($curLine)\n\n")
+			if ($curLine !~ m/^(.+?)\s+(\S+)$/);
+
+		my $regex = qr($1);
+		my $licenserName = $2;
+		
+		die ("\n\nERROR: duplicate pattern in $setup->{patternFilename} ($regex)\n\n")
+			if defined($setup->{licenserByPattern}->{$regex});
+
+		die ("\n\nERROR: invalid licenser name in $setup->{patternFilename} ($licenserName)\n\n")
+			if !defined($setup->{licenserByName}->{$licenserName});
+		
+		$setup->{licenserByPattern}->{$regex} = $setup->{licenserByName}->{$licenserName};
+		push(@{$setup->{patternsArray}}, $regex);
+	}
+}
+
+sub processFiles
+{
+	my ($setup) = @_;
+
+	my $cmd = "find $setup->{fileRootDir} -type f";
+	my @filenamesToProcess = `$cmd`;
+
+	foreach (@filenamesToProcess) 
+	{
+		my $curFilename = $_;
+		$curFilename =~ s/^\s+|\s+$//g;
+		next
+			if $curFilename eq "";
+
+		my $curFilenameMatchedPattern = 0;
+		my $licenser = undef;
+
+		foreach (@{$setup->{patternsArray}})
+		{
+			my $curPattern = $_;
+			if ($curFilename =~ m/$curPattern/) {
+				$licenser = $setup->{licenserByPattern}->{$curPattern};
+				last;
+			}
+		}
+
+		if (defined($licenser))
+		{
+			if ($setup->{addLicense}) {
+				$actionString = $licenser->addLicense($curFilename, $setup->{licenseLines}) ? "ADDED_LICENSE" : "NO_ACTION";
+			} else {
+				$actionString = $licenser->removeLicense($curFilename, $setup->{licenseLines}) ? "REMOVED_LICENSE" : "NO_ACTION";
+			}
+			print STDOUT (sprintf("%-20.20s %s\n", $actionString, $curFilename));
+		}
+		else
+		{
+			#print STDOUT ("\nERROR: file did not match any pattern ($curFilename)\n\n");
+		}
+	} # foreach (filename to process)
+}
+
+##
+## UTILITY METHODS
+##
+
+sub parseArgs
+{
+	my @args = @_;
+	
+	my $setup = {};
+	$setup->{licenseFilename} = $SCRIPT_DIR . "license.txt";
+	$setup->{patternFilename} = $SCRIPT_DIR . "patterns.txt";
+	$setup->{fileRootDir} = $SCRIPT_DIR . "../../";
+	$setup->{addLicense} = 1;
+
+	while (defined(my $curArg = shift(@args)))
+	{
+		if ($curArg eq "-remove") {
+			$setup->{addLicense} = 0;
+		} else {
+			printUsage("unknown argument ($curArg)");
+		}
+	}
+	
+	return $setup;
+}
+
+sub printUsage
+{
+	my ($errorMsg) = @_;
+	
+	open(IN, $SCRIPT_DIR . "usage.txt");
+	my @lines = <IN>;
+	close(IN);
+	
+	print STDOUT (@lines);
+
+	if (defined($errorMsg)) {
+		print STDOUT ("\nERROR: $errorMsg\n\n")		
+	}
+	exit(1);
+}

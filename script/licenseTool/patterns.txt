@@ -1,0 +1,77 @@
+# Copyright 2011-2013 Rice University. Licensed under the Affero General Public 
+# License version 3 or later.  See the COPYRIGHT file for details.
+
+###############################################################################
+# USAGE
+###############################################################################
+#
+# Each entry in this file consists of one line containing a perl regular
+# expression (regex) and a Licenser name.  The last token on a line is 
+# considered to be the Licenser name. 
+#
+# Whitespace at the beginning and end of a line and between the regex and the 
+# Licenser name is ignored.
+#
+# Text after a '#' symbol is considered a comment and is ignored.
+#
+# Blank lines are ignored.
+#
+# For each filename being processed, this file is scanned from top to bottom.
+# The first regex matching the filename causes the associated Licenser to
+# apply the license to that file.
+#
+# All lines in license.txt are commented.  Note, however, that each Licenser
+# adds additional blank lines between the license text and the file contents as
+# appropriate.
+#
+# The exact list of supported Licenser names is determined by the perl
+# modules matching the pattern "*Licenser.pm" in the script directory.  The
+# name of a Licenser is the part of the filename matching the '*'.  Some of
+# the currently supported Licenser names are:
+#
+#    Coffee        prepend "# " to each line
+#    Css           use '/* ... */' delimiters before first and after last lines
+#                  and prefix each line with ' * '
+#    Erb           use '<%# ... %>' delimiters on first and last lines
+#    JavsScript    prepend '// ' to each line
+#    Latex         prepend '% ' to each line
+#    Noop          do not apply the license to the file
+#    PerlModule    prepend '# ' to each line
+#    Ruby          prepend '# ' to each line
+#    Rake          prepend '# ' to each line
+#    Script        prepend '# ' to each line; insert after first line of file
+#    Scss          prepend '// ' to each line
+#    Text          prepend '# ' to each line
+#    Yaml          prepend '# ' to each line
+#
+###############################################################################
+
+/vendor                 Noop
+\.git					Noop
+\.png$					Noop
+license.txt$		    Noop
+\.zip$                  Noop
+\.svg$                  Noop
+
+\.rb$					Ruby
+config.ru$              Ruby
+Gemfile$                Ruby
+Capfile$                Ruby
+\.feature$              Ruby
+
+\.erb$                  Erb
+
+\.css$					Css
+\.scss$					Scss
+
+\.js$					JavaScript
+\.coffee$				Coffee
+
+\.pl$					Script
+patterns.txt$           PerlModule
+\.pm$                   PerlModule
+
+\.rake$					Rake
+Rakefile$               Rake
+
+\.yml                   Yaml
