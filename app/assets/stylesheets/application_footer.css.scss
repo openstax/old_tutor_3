@@ -1,6 +1,8 @@
 @import "common";
 
 #application-footer-frame {
+  clear: both;
+  
   height: $application_footer_height;
   background-color: $application_footer_background_color;
 }

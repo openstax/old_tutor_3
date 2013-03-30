@@ -1,0 +1,22 @@
+<% content_for :application_body do %>
+
+  <div id="application-body-nav">
+
+    <div id="application-body-nav-account-bar">
+      <%= render  :partial  => "layouts/application_account_bar", 
+                  :locals   => { :icon_color => "gray" } %>
+    </div>
+
+    <div id="application-body-nav-body">
+      <%= yield %>
+    </div>
+
+    <div id="application-body-nav-nav">
+      <%= yield :nav %>
+    </div>
+
+  </div>
+
+<% end %>
+
+<%= render :template => "layouts/application" %>

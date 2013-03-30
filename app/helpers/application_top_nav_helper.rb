@@ -23,7 +23,7 @@ module ApplicationTopNavHelper
             :locals   => {  :target_text            => "COURSE CATALOG",
                             :target_image           => "",
                             :target_id              => "top-nav-course-catalog-link",
-                            :target_path            => "#",
+                            :target_path            => course_catalog_page_path,
                             :target_current_symbol  => :top_nav_course_catalog_current }
   end
 

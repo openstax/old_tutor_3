@@ -1,12 +1,10 @@
 @import "common";
 
-$account_bar_frame_padding_tb: $application_top_nav_bottom_overhang;
-$account_bar_frame_padding_lr: 0px;
+$account_bar_content_padding_tb: $application_top_nav_bottom_overhang;
 
 #account-bar-frame {
 
   height:  $application_account_bar_height;
-  padding: $account_bar_frame_padding_tb $account_bar_frame_padding_lr;
 
   background-color: $ost_light_beige;
 }
@@ -18,12 +16,14 @@ $account_bar_frame_padding_lr: 0px;
 // padding-top 7px
 
 #account-bar-content {
-  padding-left:  $application_edge_distance;
-  padding-right: $application_edge_distance;
+  padding-top:    $account_bar_content_padding_tb;
+  padding-bottom: $account_bar_content_padding_tb;
+  padding-left:   $application_edge_distance;
+  padding-right:  $application_edge_distance;
 }
 
 #account-bar-links {
-  $account_bar_links_height: $application_account_bar_height - 2*$account_bar_frame_padding_tb;
+  $account_bar_links_height: $application_account_bar_height - 2*$account_bar_content_padding_tb;
 
   float: right;
 
