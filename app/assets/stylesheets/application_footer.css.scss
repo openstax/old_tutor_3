@@ -1,11 +1,18 @@
-@import "application_layout";
+@import "common";
 
-#application-footer {
-  @include header-main-footer-common;
+#application-footer-frame {
+  height: $application_footer_height;
+  background-color: $application_footer_background_color;
+}
+
+#application-footer-content {
+  height: $application_footer_height;
+
+  padding-left:  $application_edge_distance;
+  padding-right: $application_edge_distance;
 
   background: image-url("footer_flare.png") top right no-repeat;
-  height:           77px;
-  background-color: #7d7d7d;
+
   color:            #dddddd;
   font-size:        10px;
   font-family:      verdana, arial, helvetica, sans-serif;

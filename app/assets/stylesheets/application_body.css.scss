@@ -1,9 +1,9 @@
 @import "application_layout";
 
-#application-body a {
-  font-weight: normal;
+#application-body {
+  min-height: 300px;
 }
 
-#application-body {
-  margin-bottom: -15px;
+#application-body a {
+  font-weight: normal;
 }
