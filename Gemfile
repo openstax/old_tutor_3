@@ -35,7 +35,7 @@ gem 'jquery-rails'
 gem 'thin'
 
 group :development, :test do
-  gem 'debugger', '~> 1.1.4'
+  gem 'debugger', '~> 1.5.0'
   gem 'quiet_assets'
 end
 
