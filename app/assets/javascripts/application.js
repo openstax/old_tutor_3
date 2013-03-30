@@ -1,4 +1,4 @@
-// Copyright 2011-2012 Rice University. Licensed under the Affero General Public 
+// Copyright 2011-2013 Rice University. Licensed under the Affero General Public 
 // License version 3 or later.  See the COPYRIGHT file for details.
 
 // This is a manifest file that'll be compiled into application.js, which will include all the files
