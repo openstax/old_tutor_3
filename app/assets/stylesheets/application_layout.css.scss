@@ -13,19 +13,10 @@ body, p, ol, ul, td, a {
 
 #application-container {
   width: $application_master_width;
-  margin-left:  auto;
-  margin-right: auto;
+
+  margin: 0px auto;
+
   font-weight: normal;
-  font-color:  #000;
-  margin-top:  0px;
-}
-
-.top_level_container {}
-
-@mixin header-main-footer-common {
-  padding-left:   $application_edge_distance;
-  padding-right:  $application_edge_distance;
-
-  $top_nav_bottom_margin: -10px;
+  font-color:  black;
 }
 
