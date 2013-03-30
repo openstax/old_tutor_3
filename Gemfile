@@ -16,6 +16,11 @@ group :production do
 end
 # gem 'sqlite3'
 
+
+gem 'jquery-rails'
+gem 'thin'
+gem 'faker'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -29,10 +34,6 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
 end
-
-gem 'jquery-rails'
-
-gem 'thin'
 
 group :development, :test do
   gem 'debugger', '~> 1.5.0'
