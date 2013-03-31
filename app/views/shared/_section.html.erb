@@ -1,0 +1,14 @@
+<div <%= section.section_element.id_attr.to_s %> <%= section.section_element.class_attr.to_s %> >
+
+  <% if section.show_heading? %>
+    <div <%= section.heading_element.class_attr.to_s %> >
+      <p>HEADING: <%= section.heading %></p>
+    </div>
+  <% end %>
+
+  <div <%= section.body_element.class_attr.to_s %> >
+    <%= section.captured_block %>
+  </div>
+
+</div>
+
