@@ -14,15 +14,14 @@ class SectionBlock < BlockBase
     @template = template
     @block    = block
 
-    section_element.class_attr.add "section-section"
-    heading_element.class_attr.add "section-heading"
-    body_element.class_attr.add    "section-body"
+    section_class_attr_add "section-block-section"
+    heading_class_attr_add "section-block-heading"
+    body_class_attr_add    "section-block-body"
   end
 
   def heading=(string)
     raise "SectionBlock heading cannot be reassigned once initialized" \
       if @heading
-
     @heading = string
   end
 

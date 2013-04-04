@@ -5,8 +5,8 @@
 
 <%= section_block do |sb| %>
   <% sb.heading = "Section Heading 1" %>
-  <% sb.section_element.id_attr = "specific-section-id" %>
-  <% sb.section_element.class_attr.add "important" %>
+  <% sb.section_id_add "specific-section-id" %>
+  <% sb.section_class_add "important" %>
 
   <p><%= Faker::Lorem.paragraph(1+rand(20)) %></p>
   <p><%= Faker::Lorem.paragraph(1+rand(10)) %></p>
@@ -16,7 +16,7 @@
 
 <%= section_block do |sb| %>
   <% sb.heading = "Section Heading 2" %>
-  <% sb.section_element.class_attr.add "not-important" %>
+  <% sb.section_class_add "not-important" %>
 
   <p><%= Faker::Lorem.paragraph(1+rand(20)) %></p>
   <p><%= Faker::Lorem.paragraph(1+rand(10)) %></p>

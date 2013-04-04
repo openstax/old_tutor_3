@@ -1,3 +1,3 @@
 class BlockBase
-  extend HtmlContainer
+  include Attribeautiful
 end
