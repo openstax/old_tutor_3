@@ -14,15 +14,19 @@ class SectionBlock < BlockBase
     @template = template
     @block    = block
 
-    section_class_attr_add "section-block-section"
-    heading_class_attr_add "section-block-heading"
-    body_class_attr_add    "section-block-body"
+    section_class_add "section-block-section"
+    heading_class_add "section-block-heading"
+    body_class_add    "section-block-body"
   end
 
   def heading=(string)
     raise "SectionBlock heading cannot be reassigned once initialized" \
       if @heading
     @heading = string
+  end
+
+  def nesting=(depth)
+    section_class_add "nesting-#{depth}"
   end
 
   def to_s
