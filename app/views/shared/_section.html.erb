@@ -1,12 +1,15 @@
-<div <%= section.section_element.id_attr.to_s %> <%= section.section_element.class_attr.to_s %> >
+<%# Copyright 2011-2013 Rice University. Licensed under the Affero General Public 
+    License version 3 or later.  See the COPYRIGHT file for details. %>
+
+<div <%= section.section_id_attr %> <%= section.section_class_attr %> >
 
   <% if section.show_heading? %>
-    <div <%= section.heading_element.class_attr.to_s %> >
-      <p>HEADING: <%= section.heading %></p>
+    <div <%= section.heading_class_attr %> >
+      <%= section.heading %>
     </div>
   <% end %>
 
-  <div <%= section.body_element.class_attr.to_s %> >
+  <div <%= section.body_class_attr %> >
     <%= section.captured_block %>
   </div>
 

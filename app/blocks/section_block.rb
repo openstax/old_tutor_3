@@ -1,6 +1,7 @@
-class SectionBlock
+# Copyright 2011-2013 Rice University. Licensed under the Affero General Public 
+# License version 3 or later.  See the COPYRIGHT file for details.
 
-  extend HtmlContainer
+class SectionBlock < BlockBase
 
   html_element :section
   html_element :heading
@@ -13,9 +14,19 @@ class SectionBlock
     @template = template
     @block    = block
 
-    section_element.class_attr.add "section-section"
-    heading_element.class_attr.add "section-heading"
-    body_element.class_attr.add    "section-body"
+    section_class_add "section-block-section"
+    heading_class_add "section-block-heading"
+    body_class_add    "section-block-body"
+  end
+
+  def heading=(string)
+    raise "SectionBlock heading cannot be reassigned once initialized" \
+      if @heading
+    @heading = string
+  end
+
+  def nesting=(depth)
+    section_class_add "nesting-#{depth}"
   end
 
   def to_s
