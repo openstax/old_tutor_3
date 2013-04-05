@@ -1,8 +1,6 @@
 @import "common";
 
-.section-block-section {
-  $section_font_size: 16px;
-
+@mixin section-block-common($section_font_size) {
   margin: 28px 0px 18px 0px;
 
   .section-block-heading {
@@ -22,25 +20,11 @@
   }
 }
 
+.section-block-section {
+  @include section-block-common(16px);
+}
+
 
 .section-block-section.nesting-2 {
-  $section_font_size: 12px;
-
-  margin: 28px 0px 18px 0px;
-
-  .section-block-heading {
-    margin:         3px 0px;
-    padding-bottom: $section_font_size/2;
-
-    color:     $os_dark_gray;
-    font-size: $section_font_size;
-
-    a { 
-      font-size: $section_font_size; 
-    }
-  }
-
-  .section-block-body {
-    margin: 0px 0px 0px 15px;
-  }
+  @include section-block-common(12px);
 }
