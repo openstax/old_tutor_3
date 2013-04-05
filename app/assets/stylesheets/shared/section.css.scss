@@ -1,17 +1,17 @@
 @import "common";
 
-@mixin section-block-common($section_font_size) {
+@mixin section-block-base($heading_font_size) {
   margin: 28px 0px 18px 0px;
 
   .section-block-heading {
     margin:         3px 0px;
-    padding-bottom: $section_font_size/2;
+    padding-bottom: $heading_font_size/2;
 
     color:     $os_dark_gray;
-    font-size: $section_font_size;
+    font-size: $heading_font_size;
 
     a { 
-      font-size: $section_font_size; 
+      font-size: $heading_font_size; 
     }
   }
 
@@ -21,10 +21,20 @@
 }
 
 .section-block-section {
-  @include section-block-common(16px);
+  @include section-block-base(16px);
 }
 
+.section-block-section.bar-top {
+  padding-top: 15px;
+  border-top:  1px solid #898989;
+}
 
 .section-block-section.nesting-2 {
-  @include section-block-common(12px);
+  @include section-block-base(14px);
+
+  .section-block-heading {
+    margin: 3px 0px 6px 0px;
+
+    font-style: italic;
+  }
 }
