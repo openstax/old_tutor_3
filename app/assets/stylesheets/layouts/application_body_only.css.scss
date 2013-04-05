@@ -3,15 +3,17 @@
 
 @import "common";
 
-#application-body-only {
+#application-body-only-frame {
   position: relative;
 
   $body_width:  $application_master_width - 2*$application_edge_distance;
 
   #application-body-only-body-content {
-    width:         $body_width;
-    padding-left:  $application_edge_distance;
-    padding-right: $application_edge_distance;
+    width:          $body_width;
+    padding-left:   $application_edge_distance;
+    padding-right:  $application_edge_distance;
+    padding-top:    $application_basic_spacing;
+    padding-bottom: $application_basic_spacing;
 
     #application-body-only-body {
     }

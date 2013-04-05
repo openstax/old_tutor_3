@@ -3,10 +3,12 @@
 
 <% top_nav_course_catalog_active %>
 
-<p><%= Faker::Lorem.paragraph(1+rand(30)) %></p>
-<p><%= Faker::Lorem.paragraph(1+rand(10)) %></p>
-<p><%= Faker::Lorem.paragraph(1+rand(3)) %></p>
-<p><%= Faker::Lorem.paragraph(1+rand(20)) %></p>
+<%= section_block do |sb| %>
+  <p><%= Faker::Lorem.paragraph(1+rand(30)) %></p>
+  <p><%= Faker::Lorem.paragraph(1+rand(10)) %></p>
+  <p><%= Faker::Lorem.paragraph(1+rand(3)) %></p>
+  <p><%= Faker::Lorem.paragraph(1+rand(20)) %></p>
+<% end %>
 
 <% content_for :nav do %>
   <p><%= Faker::Lorem.paragraph(1+rand(10)) %></p>
