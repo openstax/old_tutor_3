@@ -11,11 +11,15 @@
     </div>
 
     <div id="application-body-nav-body">
-      <%= yield %>
+      <div id="application-body-nav-body-content">
+        <%= yield %>
+      </div>
     </div>
 
     <div id="application-body-nav-nav">
-      <%= yield :nav %>
+      <div id="application-body-nav-nav-content">
+        <%= yield :nav %>
+      </div>
     </div>
 
   </div>

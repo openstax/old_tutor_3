@@ -6,16 +6,28 @@
 #application-body-nav {
   position: relative;
 
-  $body_width: 700px;
-  $nav_width:  $application_master_width - $body_width;
+  $nav_width:   170px;
+  $body_width:  $application_master_width - 3*$application_edge_distance - $nav_width;
 
-  #application-body-nav-body {
-    float:   left;
-    width: $body_width;
+  #application-body-nav-body-content {
+    float: left;
+
+    width:         $body_width;
+    padding-left:  $application_edge_distance;
+    padding-right: $application_edge_distance/2;
+
+    #application-body-nav-body {
+    }
   }
 
-  #application-body-nav-nav {
-    float:   right;
-    width: $nav_width;
+  #application-body-nav-nav-content {
+    float: right;
+
+    width:         $nav_width;
+    padding-left:  $application_edge_distance/2;
+    padding-right: $application_edge_distance;
+
+    #application-body-nav-nav {
+    }
   }
 }
