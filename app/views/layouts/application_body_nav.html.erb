@@ -10,12 +10,16 @@
                   :locals   => { :icon_color => "gray" } %>
     </div>
 
-    <div id="application-body-nav-body">
-      <%= yield %>
+    <div id="application-body-nav-body-frame">
+      <div id="application-body-nav-body-content">
+        <%= yield %>
+      </div>
     </div>
 
-    <div id="application-body-nav-nav">
-      <%= yield :nav %>
+    <div id="application-body-nav-nav-frame">
+      <div id="application-body-nav-nav-content">
+        <%= yield :nav %>
+      </div>
     </div>
 
   </div>

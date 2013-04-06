@@ -8,49 +8,50 @@ class SectionBlock < BlockBase
   html_element :body
 
   attr_accessor :heading
-  attr_reader   :captured_block
+  attr_accessor :nesting
+  attr_accessor :top_bar
 
-  def initialize(template, &block)
-    @template = template
-    @block    = block
+  def initialize(template, block)
+    super(template, "section", block)
 
     section_class_add "section-block-section"
     heading_class_add "section-block-heading"
     body_class_add    "section-block-body"
   end
 
+  def set_heading(string)
+    self.heading = string
+    self
+  end
+
+  def set_nesting(depth)
+    self.nesting = depth
+    self
+  end
+
+  def set_top_bar
+    raise "SectionBlock top bar cannot be changed once initialized" \
+      if @top_bar
+    section_class_add "bar-top"
+    self.top_bar = true
+    self
+  end
+
   def heading=(string)
-    raise "SectionBlock heading cannot be reassigned once initialized" \
+    raise "SectionBlock heading cannot be changed once initialized" \
       if @heading
     @heading = string
   end
 
   def nesting=(depth)
+    raise "SectionBlock nesting cannot be changed once initialized" \
+      if @nesting
     section_class_add "nesting-#{depth}"
-  end
-
-  def to_s
-    render_passed_block
-    render_partial
+    @nesting = depth
   end
 
   def show_heading?
     heading.present?
   end
 
-protected
-
-  attr_writer :captured_block
-
-  def render_passed_block
-    self.captured_block = @template.capture self, &@block
-  end
-
-  def render_partial
-    h.render :partial => "shared/section", :locals => { :section => self }
-  end
-
-  def h
-    @template
-  end
 end

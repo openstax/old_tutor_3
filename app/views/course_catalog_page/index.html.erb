@@ -3,10 +3,30 @@
 
 <% top_nav_course_catalog_active %>
 
-<p><%= Faker::Lorem.paragraph(1+rand(30)) %></p>
-<p><%= Faker::Lorem.paragraph(1+rand(10)) %></p>
-<p><%= Faker::Lorem.paragraph(1+rand(3)) %></p>
-<p><%= Faker::Lorem.paragraph(1+rand(20)) %></p>
+<%= section_block do |sb| %>
+  <p><%= Faker::Lorem.paragraph(1+rand(30)) %></p>
+  <p><%= Faker::Lorem.paragraph(1+rand(10)) %></p>
+  <p><%= Faker::Lorem.paragraph(1+rand(3)) %></p>
+  <p><%= Faker::Lorem.paragraph(1+rand(20)) %></p>
+<% end %>
+
+<%= table_block do |tb| %>
+  <% tb.set_title("Table Title").add_column("Col1").add_column("Col2").add_column("Col3") %>
+  <% tb.add_section_heading("Section A") %>
+  <% tb.add_row_block do |rb| %>
+    <% rb.add_cell_block do |cb| %>
+      Cell1
+    <% end %>
+    <% rb.add_cell_block do |cb| %>
+      Cell2
+    <% end %>
+    <% rb.add_cell_block do |cb| %>
+      Cell3
+    <% end %>
+  <% end %>
+  <% tb.add_section_heading("Section B") %>
+  <% tb.add_row *%W{Cell4 Cell5 Cell6} %>
+<% end %>
 
 <% content_for :nav do %>
   <p><%= Faker::Lorem.paragraph(1+rand(10)) %></p>

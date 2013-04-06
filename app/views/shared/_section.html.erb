@@ -1,16 +1,16 @@
 <%# Copyright 2011-2013 Rice University. Licensed under the Affero General Public 
     License version 3 or later.  See the COPYRIGHT file for details. %>
 
-<div <%= section.section_id_attr %> <%= section.section_class_attr %> >
+<div <%= block.section_id_attr %> <%= block.section_class_attr %> >
 
-  <% if section.show_heading? %>
-    <div <%= section.heading_class_attr %> >
-      <%= section.heading %>
+  <% if block.show_heading? %>
+    <div <%= block.heading_class_attr %> >
+      <%= block.heading %>
     </div>
   <% end %>
 
-  <div <%= section.body_class_attr %> >
-    <%= section.captured_block %>
+  <div <%= block.body_class_attr %> >
+    <%= block.captured_block %>
   </div>
 
 </div>
