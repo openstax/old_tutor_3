@@ -1,3 +1,6 @@
+// Copyright 2011-2013 Rice University. Licensed under the Affero General Public 
+// License version 3 or later.  See the COPYRIGHT file for details.
+
 .table-block-table {
   margin-top: 5px;
   padding:    2px;
@@ -33,14 +36,6 @@
   td.section-heading {
     text-align: left;
     font-style: italic;
-  }
-
-  td.assignment_name {
-    padding-right: 10px;
-  }
-
-  td.assignment_grade {
-    text-align: right
   }
 
   td.outlined_cell {

@@ -272,44 +272,6 @@
 
   /************ GENERIC LIST TABLE *********************/
 
-  table.list {
-    font-size: 13px;
-    font-weight: normal;
-    font-color: #000000;
-    margin-top:5px;
-    text-align: left;
-    padding: 2px;
-    border-spacing: 2px;
-    border-width: 0px 0px 0px 0px;
-    border-style: outset outset outset outset;
-    border-color: gray gray gray gray;
-    border-collapse: collapse;
-  }
-
-  table.list th {
-    font-weight: bold;
-    text-align: left;
-    border-bottom: 1px solid black;
-  }
-
-  table.list tr {
-    border-bottom:1px solid #ddd;
-  }
-
-  table.list td.assignment_name {
-    padding-right: 10px;
-  }
-
-  table.list td.assignment_grade {
-    text-align: right
-  }
-
-  table.list td.outlined_cell {
-    border-left: 1px solid #ddd; 
-    border-right:1px solid #ddd; 
-    padding: 8px;
-  }
-
   table.list.assignment {
     width: 95%;
 
