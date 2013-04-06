@@ -11,11 +11,8 @@ class SectionBlock < BlockBase
   attr_accessor :nesting
   attr_accessor :top_bar
 
-  attr_reader   :captured_block
-
-  def initialize(template, &block)
-    @template = template
-    @block    = block
+  def initialize(template, block)
+    super(template, "section", block)
 
     section_class_add "section-block-section"
     heading_class_add "section-block-heading"
@@ -53,28 +50,8 @@ class SectionBlock < BlockBase
     @nesting = depth
   end
 
-  def to_s
-    render_passed_block
-    render_partial
-  end
-
   def show_heading?
     heading.present?
   end
 
-protected
-
-  attr_writer :captured_block
-
-  def render_passed_block
-    self.captured_block = @template.capture self, &@block
-  end
-
-  def render_partial
-    h.render :partial => "shared/section", :locals => { :section => self }
-  end
-
-  def h
-    @template
-  end
 end
