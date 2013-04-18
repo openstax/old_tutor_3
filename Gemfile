@@ -3,7 +3,7 @@
 
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.12'
+gem 'rails', '3.2.13'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -21,7 +21,7 @@ gem 'jquery-rails'
 gem 'thin'
 gem 'faker'
 
-gem 'attribeautiful'
+gem 'attribeautiful', '0.0.6'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -40,6 +40,10 @@ end
 group :development, :test do
   gem 'debugger', '~> 1.5.0'
   gem 'quiet_assets'
+
+  gem 'rspec-rails'
+  gem 'capybara', '<2.1.0'  ## see: https://github.com/thoughtbot/capybara-webkit/issues/507
+  gem 'capybara-webkit'
 end
 
 # To use ActiveModel has_secure_password
