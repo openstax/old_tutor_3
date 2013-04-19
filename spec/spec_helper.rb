@@ -21,11 +21,12 @@ RSpec.configure do |config|
   # config.mock_with :rr
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
+  # config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
+  # see http://devblog.avdi.org/2012/08/31/configuring-database_cleaner-with-rails-rspec-capybara-and-selenium/
   config.use_transactional_fixtures = false
 
   # If true, the base class of anonymous controllers will be inferred
@@ -91,6 +92,7 @@ RSpec.configure do |config|
   # For details, see:
   #   http://rubydoc.info/github/jnicklas/capybara/master#The_DSL
   #   http://blog.plataformatec.com.br/2011/12/three-tips-to-improve-the-performance-of-your-test-suite/
+  #   http://devblog.avdi.org/2012/08/31/configuring-database_cleaner-with-rails-rspec-capybara-and-selenium/
   # class ActiveRecord::Base
   #   mattr_accessor :shared_connection
   #   @@shared_connection = nil
@@ -115,5 +117,4 @@ RSpec.configure do |config|
   config.after :each do
     DatabaseCleaner.clean
   end
-
 end
