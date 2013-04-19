@@ -7,10 +7,14 @@
   <div id="account-bar-content">
 
     <div id="account-bar-links">
-      <% if true %>
-        <%= link_to "Join now", "#", :class => "#{account_bar_classes}", :'data-test-link-join' => "" %> 
+      <% if user_signed_in? %>
+        <span class="<%= account_bar_classes %>" data-test-user-welcome>Welcome, <%= current_user.email %></span>
         <%= vertical_bar(:id => "account-bar-vertical-bar", :class => "#{account_bar_classes}") %>
-        <%= link_to "Sign in", "#", :class => "#{account_bar_classes}", :'data-test-link-sign-in' => "" %>
+        <%= link_to "Sign out", destroy_user_session_path,  :class => "#{account_bar_classes}", :'data-test-link-sign-out' => "", :method => :delete %>
+      <% else %>
+        <%= link_to "Join now", new_user_registration_path, :class => "#{account_bar_classes}", :'data-test-link-join' => "" %> 
+        <%= vertical_bar(:id => "account-bar-vertical-bar", :class => "#{account_bar_classes}") %>
+        <%= link_to "Sign in",  new_user_session_path,      :class => "#{account_bar_classes}", :'data-test-link-sign-in' => "" %>
       <% end %>
 
       <%= link_to "http://www.facebook.com/openstaxtutor", :id => "facebook-link" do %>

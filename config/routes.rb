@@ -2,6 +2,8 @@
 # License version 3 or later.  See the COPYRIGHT file for details.
 
 Ost::Application.routes.draw do
+  devise_for :users, :controllers => { sessions: "sessions", registrations: "registrations" }
+
   root :to => "home_page#index"
 
   get "dashboard_page"      => "dashboard_page#index"

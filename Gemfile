@@ -9,7 +9,7 @@ gem 'rails', '3.2.13'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 group :development, :test do
-   gem 'sqlite3', '~> 1.3.6'
+  gem 'sqlite3', '~> 1.3.6'
 end
 group :production do
   gem 'mysql2', '~> 0.3.11'
@@ -17,8 +17,10 @@ end
 # gem 'sqlite3'
 
 
+gem 'devise', '~> 2.0'
 gem 'jquery-rails'
 gem 'thin'
+
 gem 'faker'
 
 gem 'attribeautiful', '0.0.6'
@@ -40,10 +42,14 @@ end
 group :development, :test do
   gem 'debugger', '~> 1.5.0'
   gem 'quiet_assets'
+end
 
+group :development, :test do
   gem 'rspec-rails'
   gem 'capybara', '<2.1.0'  ## see: https://github.com/thoughtbot/capybara-webkit/issues/507
+  gem 'capybara-screenshot'
   gem 'capybara-webkit'
+  gem 'database_cleaner'
 end
 
 # To use ActiveModel has_secure_password
@@ -57,6 +63,3 @@ end
 
 # Deploy with Capistrano
 # gem 'capistrano'
-
-# To use debugger
-# gem 'debugger'

@@ -5,6 +5,7 @@ require 'rspec/rails'
 require 'rspec/autorun'
 
 require 'capybara/rspec'
+require 'capybara-screenshot/rspec'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -25,7 +26,7 @@ RSpec.configure do |config|
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  config.use_transactional_fixtures = true
+  config.use_transactional_fixtures = false
 
   # If true, the base class of anonymous controllers will be inferred
   # automatically. This will be the default behavior in future versions of
@@ -41,4 +42,78 @@ RSpec.configure do |config|
   # Test capybara that we always want a javascript-capable driver (webkit).
   Capybara.javascript_driver = :webkit
   Capybara.default_driver    = :webkit
+
+  Capybara.default_selector = :css
+  
+  # Turn off automatic screencapture when scenario fails
+  Capybara::Screenshot.autosave_on_failure = false
+
+  # This causes capybara #has_css? and #find selectors to return quickly
+  # in the event of a failure
+  Capybara.default_wait_time = 0.01;
+
+  ###########################################################
+  # FORCE ALL THREADS TO SHARE ONE CONNECTION TO THE DATABASE
+  ###########################################################
+  #
+  # Database transactions are determined on a per-connection basis.  Each thread (or
+  # process) accessing the database establishes its own connection.
+  #
+  # There are two components to Capybara scenarios: "scenario steps" and the "browser".
+  #
+  # When Capybara runs using the :rack_test "browser", everything runs in one thread.
+  # This means that the scenario steps and browser share the same database connection
+  # and therefore can see each other's uncommitted database transactions. For example,
+  # if a scenario step programatically adds data to the database:
+  #     create_new_item(:name => "Thingy")
+  # then that change is visible to the browser:
+  #     visit '/item/1'
+  #
+  # However, when Capybara runs using any other "broswer" than :rack_test, is launches
+  # the browser in a separate thread.  Now the scenario steps and browser have separate
+  # database connections and therefore do NOT see each other's uncommitted transactions.
+  # In the example above, the browser would get a "page not found" error because item
+  # 'Thingy' doesn't exist in its database connection.
+  #
+  # The following code (plus a snippet in the Spork.for_each block) causes all database
+  # users to share the same connection.
+  #
+  # IMPORTANT NOTE:
+  #
+  # This will NOT protect against threading issues in the scenarios themselves.  For
+  # example, you have the steps:
+  #    When I click on then button to create item in database 
+  #    Then there should be an item in the database
+  # you are introducing a potential race condition.  The second step needs to block on
+  # something that tells it that the browser in the first step actually finished its
+  # interactions with the database.
+  #
+  # For details, see:
+  #   http://rubydoc.info/github/jnicklas/capybara/master#The_DSL
+  #   http://blog.plataformatec.com.br/2011/12/three-tips-to-improve-the-performance-of-your-test-suite/
+  # class ActiveRecord::Base
+  #   mattr_accessor :shared_connection
+  #   @@shared_connection = nil
+  
+  #   def self.connection
+  #     @@shared_connection || retrieve_connection
+  #   end
+  # end
+
+  config.before :suite do
+    DatabaseCleaner.clean_with :truncation
+  end
+
+  config.before :each do
+    DatabaseCleaner.strategy = :truncation
+  end
+
+  config.before :each do
+    DatabaseCleaner.start
+  end
+
+  config.after :each do
+    DatabaseCleaner.clean
+  end
+
 end
