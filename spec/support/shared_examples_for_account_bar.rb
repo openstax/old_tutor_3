@@ -30,8 +30,4 @@ shared_examples_for "account bar: logged in" do |visit_path|
     visit visit_path
     page_should_have_link 'sign-out'
   end
-
-  def page_should_have_welcome_message
-    page.should have_css '[data-test-user-welcome]'
-  end
 end

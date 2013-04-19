@@ -8,13 +8,9 @@ describe "home page" do
 
   it "is loaded when visiting root_path" do
     visit @visit_path
-    home_page_should_be_loaded
+    page_should_be_loaded 'home'
   end
 
   it_should_behave_like "account bar: logged in",     @visit_path
   it_should_behave_like "account bar: not logged in", @visit_path
-end
-
-def home_page_should_be_loaded
-  page.should have_css('[data-test-page-home]')
 end

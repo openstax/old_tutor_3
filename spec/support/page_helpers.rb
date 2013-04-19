@@ -1,7 +1,22 @@
 require 'spec_helper'
 
+def page_should_be_loaded(page_id)
+  page.should have_css "[data-test-page-#{page_id}]"
+end
+
 def page_should_have_link(link_id)
   page.should have_css "a[data-test-link-#{link_id}]"
+end
+
+def page_should_have_notice(*patterns)
+  elem = page.find "[data-test-notice]"
+  patterns.each do |pattern|
+    elem.should have_text pattern
+  end
+end
+
+def page_should_have_welcome_message
+  page.should have_css '[data-test-user-welcome]'
 end
 
 # Example usage: save_screen('not_logged_in', URI.parse(current_url).path)
