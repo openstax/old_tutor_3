@@ -37,4 +37,26 @@ Ost::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  ## Manually-added settings below ##
+
+  ########################################
+  # CONFIGURE THE RAILS APPLICATION DOMAIN
+  ########################################
+  #
+  # When our rails application starts under the :development environment, it listens
+  # on http://127.0.0.1:3000 (a.k.a. http://localhost:3000).  In the :test environment under
+  # Capybara, it listens on http://127.0.0.1 but with a Capybara-assigned port number.
+  #
+  # According to the HTTP standard, browser redirection should be done with an absolute URL,
+  # not a relative path.  This means that if our rails applications thinks its domain is
+  # "my.domain.com", redirect URLs will be of the form "my.domain.com/relative/path".
+  #
+  # When running tests, we need to tell our rails application that its domain is
+  # "127.0.0.1" to prevent redirects from taking the Capybara test "browser" to an
+  # external URL.  This only affects @javascript-capable browser drivers since
+  # :rack_test ignores the domain portion of the URL. 
+  config.action_mailer.default_url_options     = { :host => '127.0.0.1' }
+  config.action_controller.default_url_options = { :host => '127.0.0.1' }
+
 end

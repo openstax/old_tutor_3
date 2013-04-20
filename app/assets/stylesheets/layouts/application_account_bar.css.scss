@@ -32,11 +32,20 @@ $account_bar_content_padding_tb: $application_top_nav_bottom_overhang;
 
   height: $account_bar_links_height;
 
-  @mixin account-bar-link-common {
+  @mixin account-bar-text-common {
     font-size:   11px;
     font-family: verdana, arial, helvetica, sans-serif;
     font-weight: normal;
     line-height: $account_bar_links_height;
+    color:       $ost_account_gray;
+  }
+
+  @mixin account-bar-text-transparent {
+    color: white;
+  }
+
+  @mixin account-bar-link-common {
+    @include account-bar-text-common;
 
     &:hover { 
       color: $ost_hot_blue;
@@ -46,11 +55,18 @@ $account_bar_content_padding_tb: $application_top_nav_bottom_overhang;
 
   a {
     @include account-bar-link-common;
-    color: $ost_account_gray;
   }
   a.transparent {
     @include account-bar-link-common;
-    color: white;
+    @include account-bar-text-transparent;
+  }
+
+  span {
+    @include account-bar-text-common;
+  }
+  span.transparent {
+    @include account-bar-text-common;
+    @include account-bar-text-transparent;
   }
 
   #facebook-link {
