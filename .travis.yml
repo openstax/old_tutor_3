@@ -26,3 +26,6 @@ branches:
 before_script:
   - gem install mysql2
   - mysql -e 'create database ost_test'
+before_install:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
