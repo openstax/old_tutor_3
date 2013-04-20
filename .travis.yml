@@ -19,7 +19,7 @@ rvm:
 env:
   - DB=mysql
 script:
-  - RAILS_ENV=test bundle exec rake --trace db:migrate test
+  - RAILS_ENV=test bundle exec rake --trace db:migrate spec
 branches:
   only:
     - master
