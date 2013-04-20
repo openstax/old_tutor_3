@@ -42,3 +42,7 @@ def page_save_screen(prefix, path=nil)
     end
   end
 end
+
+def wait_for_browser
+  page.find('div#application-footer-content')
+end

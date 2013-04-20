@@ -40,9 +40,13 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 
-  # Test capybara that we always want a javascript-capable driver (webkit).
+  # Test capybara that we always want a javascript-capable driver.
+  # Webkit is a headless, javascript-capable browser.
+  # Selenium drives an actual Firefox browser.
   Capybara.javascript_driver = :webkit
   Capybara.default_driver    = :webkit
+  # Capybara.javascript_driver = :selenium
+  # Capybara.default_driver    = :selenium
 
   Capybara.default_selector = :css
   
@@ -116,5 +120,9 @@ RSpec.configure do |config|
 
   config.after :each do
     DatabaseCleaner.clean
+  end
+
+  config.before :each do
+    email_deliveries_clear
   end
 end

@@ -20,6 +20,7 @@ end
 gem 'devise', '~> 2.0'
 gem 'jquery-rails'
 gem 'thin'
+gem 'squeel'
 
 gem 'faker'
 

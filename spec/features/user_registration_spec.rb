@@ -14,26 +14,24 @@ describe "user registration" do
   context "successful registration" do
 
     it "sends user confirmation email upon successful completion of form" do
-      ActionMailer::Base.deliveries = []
-
-      visit_new_user_registration_page
-      fill_in_email_with                  "user@example.com"
-      fill_in_password_with               "password"
-      fill_in_password_confirmation_with  "password"
-      click_submit
+      register_as email: "user@example.com", password: "password"
 
       page_should_be_loaded 'home'
-      page_should_have_notice 'confirmation link', 'sent', 'email'
+      page_should_have_notice 'confirmation', 'user@example.com'
 
-      ActionMailer::Base.deliveries.count.should eq 1
+      email_deliveries.count.should eq 1
 
-      email = ActionMailer::Base.deliveries.first
-      email.body.should match %r{"(http:.+/users/confirmation.*?)"}
+      email = email_body(email_deliveries.first)
+
+      email.should match confirmation_url_regex
+
+      email =~ confirmation_url_regex
       confirmation_path = $1
+
       visit confirmation_path
 
       page_should_be_loaded 'home'
-      
+      page_should_have_welcome_message
     end
 
   end
@@ -50,6 +48,22 @@ describe "user registration" do
     it "confirms that the user typed his password correctly" do
 
     end
+  end
+
+  def confirmation_url_regex
+    %r{\"http:.+(/users/confirmation.*?)\"}  # do NOT include the http://hostname:port portion!
+  end
+
+  def register_as(args)
+    email         = args.fetch(:email) { raise ":email must be given" }
+    password      = args[:passowrd]              || session_default_user_password
+    password_conf = args[:passowrd_confirmation] || password
+ 
+    visit_new_user_registration_page
+    fill_in_email_with                  email
+    fill_in_password_with               password
+    fill_in_password_confirmation_with  password_conf
+    click_submit
   end
 
   def visit_new_user_registration_page
