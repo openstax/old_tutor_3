@@ -22,6 +22,7 @@ gem 'jquery-rails'
 gem 'thin'
 gem 'squeel'
 
+gem 'rails-erd'
 gem 'faker'
 
 gem 'attribeautiful', '0.0.6'

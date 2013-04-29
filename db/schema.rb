@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130419004807) do
+ActiveRecord::Schema.define(:version => 20130427001757) do
+
+  create_table "user_account_infos", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "first_name", :null => false
+    t.string   "last_name",  :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "user_account_infos", ["user_id"], :name => "index_user_account_infos_on_user_id", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
