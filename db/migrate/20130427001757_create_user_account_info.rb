@@ -1,7 +1,7 @@
 class CreateUserAccountInfo < ActiveRecord::Migration
   def change
     create_table(:user_account_infos) do |t|
-      t.references :user
+      t.references :user, :null => false
 
       t.string :first_name, :null => false
       t.string :last_name,  :null => false

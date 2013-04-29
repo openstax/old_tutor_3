@@ -8,7 +8,7 @@ class RegistrationsController < Devise::RegistrationsController
     if resource.save
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up, email: resource.email if is_navigational_format?
-        sign_up(resource_name, resource)
+        sign_up(resource_name, resource.user)
         respond_with resource, :location => after_sign_up_path_for(resource)
       else
         set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}", email: resource.email if is_navigational_format?
@@ -21,4 +21,8 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def build_resource(hash=nil)
+    hash ||= resource_params || {}
+    self.resource = UserRegistrationFormObject.new hash
+  end
 end

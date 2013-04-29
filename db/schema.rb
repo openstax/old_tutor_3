@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(:version => 20130427001757) do
 
   create_table "user_account_infos", :force => true do |t|
-    t.integer  "user_id"
+    t.integer  "user_id",    :null => false
     t.string   "first_name", :null => false
     t.string   "last_name",  :null => false
     t.datetime "created_at", :null => false

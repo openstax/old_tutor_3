@@ -9,12 +9,12 @@ describe "registration page" do
 
 end
 
-describe "user registration" do
+describe "user registration process" do
 
-  context "successful registration" do
+  context "successful registration and confirmation sequence" do
 
-    it "sends user confirmation email upon successful completion of form" do
-      register_as email: "user@example.com", password: "password"
+    it "sends the user an email with a valid confirmation link upon successful completion of form" do
+      register_as email: 'user@example.com'
 
       page_should_be_loaded 'home'
       page_should_have_notice 'confirmation', 'user@example.com'
@@ -23,12 +23,9 @@ describe "user registration" do
 
       email = email_body(email_deliveries.first)
 
-      email.should match confirmation_url_regex
+      email_should_contain_confirmation_url(email)
 
-      email =~ confirmation_url_regex
-      confirmation_path = $1
-
-      visit confirmation_path
+      visit confirmation_path(email)
 
       page_should_be_loaded 'home'
       page_should_have_welcome_message
@@ -36,30 +33,16 @@ describe "user registration" do
 
   end
 
-  context "unsuccessful registrations" do
-    it "does not allow two users to have the same email address" do
-
-    end
-
-    it "does not allow passwords of less than 8 characters" do
-
-    end
-
-    it "confirms that the user typed his password correctly" do
-
-    end
-  end
-
-  def confirmation_url_regex
-    %r{\"http:.+(/users/confirmation.*?)\"}  # do NOT include the http://hostname:port portion!
-  end
-
   def register_as(args)
-    email         = args.fetch(:email) { raise ":email must be given" }
-    password      = args[:passowrd]              || session_default_user_password
-    password_conf = args[:passowrd_confirmation] || password
+    first_name    = args.fetch(:first_name,            session_default_user_first_name)
+    last_name     = args.fetch(:last_name,             session_default_user_last_name)
+    email         = args.fetch(:email)                 { raise ":email must be given" }
+    password      = args.fetch(:password,              session_default_user_password)
+    password_conf = args.fetch(:password_confirmation, password)
  
     visit_new_user_registration_page
+    fill_in_first_name_with             first_name
+    fill_in_last_name_with              last_name
     fill_in_email_with                  email
     fill_in_password_with               password
     fill_in_password_confirmation_with  password_conf
@@ -68,6 +51,14 @@ describe "user registration" do
 
   def visit_new_user_registration_page
     visit new_user_registration_path
+  end
+
+  def fill_in_first_name_with(name)
+    fill_in :user_first_name, with: name
+  end
+
+  def fill_in_last_name_with(name)
+    fill_in :user_last_name, with: name
   end
 
   def fill_in_email_with(email_addr)
@@ -86,4 +77,18 @@ describe "user registration" do
     elem = page.find '[data-test-button-submit]'
     elem.click
   end
+
+  def email_should_contain_confirmation_url(email)
+    email.should match confirmation_url_regex
+  end
+
+  def confirmation_path(email)
+    email =~ confirmation_url_regex
+    $1
+  end
+
+  def confirmation_url_regex
+    %r{\"http:.+(/users/confirmation.*?)\"}  # do NOT include the http://hostname:port portion!
+  end
+
 end

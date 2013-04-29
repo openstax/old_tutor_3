@@ -17,6 +17,14 @@ def session_sign_in_as(user)
   click_on "sign-in"
 end
 
+def session_default_user_first_name
+  "First"
+end
+
+def session_default_user_last_name
+  "Last"
+end
+
 def session_default_user_password
   "password"
 end

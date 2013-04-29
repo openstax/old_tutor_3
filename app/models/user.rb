@@ -1,12 +1,4 @@
 class User < ActiveRecord::Base
-  has_one   :user_account_info, inverse_of: :user, dependent: :destroy
-  validates :user_account_info, presence: true
-
-  accepts_nested_attributes_for :user_account_info
-  attr_accessible :user_account_info_attributes
-
-  after_initialize :add_user_account_info
-
   # Include default devise modules. Others available are:
   # :token_authenticatable and :omniauthable
   devise  :database_authenticatable,  ## See DeviseCreateUsers migration
@@ -24,10 +16,8 @@ class User < ActiveRecord::Base
                   :password, :password_confirmation,
                   :remember_me
 
-private
-
-  def add_user_account_info
-    build_user_account_info if new_record? && user_account_info.nil?
-  end
-
+  VALID_EMAIL_REGEX = /\A[\w\.-]+@[\w-.]+\z/
+  validates :email, presence: true,
+                    length:   { minimum: 3, maximum: 320},
+                    format:   { with: VALID_EMAIL_REGEX }
 end
