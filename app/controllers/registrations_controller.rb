@@ -21,8 +21,4 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 
-  def build_resource(hash=nil)
-    hash ||= resource_params || {}
-    self.resource = UserRegistrationFormObject.new hash
-  end
 end

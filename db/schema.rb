@@ -11,17 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130427001757) do
-
-  create_table "user_account_infos", :force => true do |t|
-    t.integer  "user_id",    :null => false
-    t.string   "first_name", :null => false
-    t.string   "last_name",  :null => false
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "user_account_infos", ["user_id"], :name => "index_user_account_infos_on_user_id", :unique => true
+ActiveRecord::Schema.define(:version => 20130501092153) do
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -43,6 +33,8 @@ ActiveRecord::Schema.define(:version => 20130427001757) do
     t.datetime "locked_at"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.string   "first_name",             :default => "", :null => false
+    t.string   "last_name",              :default => "", :null => false
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

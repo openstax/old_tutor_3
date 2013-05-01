@@ -8,9 +8,10 @@
 
     <div id="account-bar-links">
       <% if user_signed_in? %>
-        <span class="<%= account_bar_classes %>" data-test-user-welcome>Welcome, <%= current_user.email %></span>
-        <%= vertical_bar(:id => "account-bar-vertical-bar", :class => "#{account_bar_classes}") %>
-        <%= link_to "Sign out", destroy_user_session_path,  :class => "#{account_bar_classes}", :'data-test-link-sign-out' => "", :method => :delete %>
+        <span class="<%= account_bar_classes %> welcome-message" data-test-user-welcome><%= salutation current_user %></span>
+        <%= link_to "My Account", edit_user_registration_path, :class => "#{account_bar_classes}", :'data-test-link-my-account' => "" %>
+        <%= vertical_bar(:id => "account-bar-vertical-bar",    :class => "#{account_bar_classes}") %>
+        <%= link_to "Sign out", destroy_user_session_path,     :class => "#{account_bar_classes}", :'data-test-link-sign-out' => "", :method => :delete %>
       <% else %>
         <%= link_to "Join now", new_user_registration_path, :class => "#{account_bar_classes}", :'data-test-link-join' => "" %> 
         <%= vertical_bar(:id => "account-bar-vertical-bar", :class => "#{account_bar_classes}") %>
