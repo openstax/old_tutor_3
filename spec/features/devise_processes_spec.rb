@@ -11,7 +11,7 @@ end
 
 describe "user registration and account management features" do
 
-  context "successful user registration and confirmation sequence" do
+  context "successful registration and confirmation sequence" do
 
     it "sends the user an email with a valid confirmation link upon successful completion of form" do
       register_as email: 'user@example.com'
@@ -34,7 +34,7 @@ describe "user registration and account management features" do
 
   end
 
-  context "successful change of user's registered email address sequence" do
+  context "user changes registered email address sequence" do
 
     it "sends the user an email with a valid confirmation link upon successful completion of form" do
       user = user_create_confirmed email: 'user@example.com'
