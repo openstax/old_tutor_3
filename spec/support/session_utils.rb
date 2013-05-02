@@ -10,10 +10,14 @@ def session_sign_in
   session_sign_in_as(user)
 end
 
-def session_sign_in_as(user)
+def session_sign_in_as(user, args={})
+  args = { email:     user.email,
+           password:  session_default_user_password
+         }.merge args
+
   visit new_user_session_path
-  fill_in :user_email,    with: user.email
-  fill_in :user_password, with: session_default_user_password
+  fill_in :user_email,    with: args[:email]
+  fill_in :user_password, with: args[:password]
   click_on "sign-in"
 end
 

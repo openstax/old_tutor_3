@@ -10,8 +10,17 @@ end
 
 def page_should_have_notice(*patterns)
   elem = page.find "[data-test-notice]"
+  page_match_elem_text(elem, *patterns)
+end
+
+def page_should_have_alert(*patterns)
+  elem = page.find "[data-test-alert]"
+  page_match_elem_text(elem, *patterns)
+end
+
+def page_match_elem_text(elem, *patterns)
   patterns.each do |pattern|
-    elem.should have_text pattern
+    elem.text.should =~ regexp_case_insensitive(pattern)
   end
 end
 

@@ -44,6 +44,7 @@ end
 group :development, :test do
   gem 'debugger', '~> 1.5.0'
   gem 'quiet_assets'
+  gem 'timecop'
 end
 
 group :development, :test do

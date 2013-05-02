@@ -9,7 +9,7 @@ describe "registration page" do
 
 end
 
-describe "user registration process" do
+describe "user registration and account management features" do
 
   context "successful registration and confirmation sequence" do
 
@@ -20,15 +20,90 @@ describe "user registration process" do
       page_should_have_notice 'confirmation', 'user@example.com'
 
       email_deliveries.count.should eq 1
+      email = email_deliveries.first
 
-      email = email_body(email_deliveries.first)
+      email.to.should eq ['user@example.com']
 
-      email_should_contain_confirmation_url(email)
+      email.body.decoded.should match confirmation_url_regexp
 
       visit confirmation_path(email)
 
       page_should_be_loaded 'home'
       page_should_have_welcome_message
+    end
+
+  end
+
+  context "user changes registered email address sequence" do
+
+    it "sends the user an email with a valid confirmation link upon successful completion of form" do
+      user = user_create_confirmed email: 'user@example.com'
+
+      session_sign_in_as(user)
+      visit_edit_user_registration_page(user)
+
+      change_email_address_to 'newuser@example.com'
+
+      page_should_be_loaded 'home'
+      page_should_have_notice 'confirmation', 'newuser@example.com'
+
+      email_deliveries.count.should eq 1
+      email = email_deliveries.first
+
+      email.to.should eq ['newuser@example.com']
+      email.body.decoded.should match confirmation_url_regexp
+
+      visit confirmation_path(email)
+
+      page_should_be_loaded 'home'
+      page_should_have_welcome_message
+    end
+
+  end
+
+  context "user account locking" do
+
+    it "locks user account after 9th failed login attempt and sends email with a valid unlock link" do
+      user = user_create_confirmed email: 'user@example.com', password: 'password'
+
+      8.times do
+        session_sign_in_as user, password: 'not-the-password'
+        page_should_be_loaded 'new-user-session'
+        page_should_have_alert 'invalid'
+      end
+      session_sign_in_as user, password: 'not-the-password'
+      page_should_be_loaded 'new-user-session'
+
+      page_should_have_alert 'locked'
+
+      email_deliveries.count.should eq 1
+      email = email_deliveries.first
+
+      email.to.should eq ['user@example.com']
+      email.body.decoded.should match unlock_url_regexp
+
+      visit unlock_path(email)
+      page_should_be_loaded 'new-user-session'
+      page_should_have_notice 'unlocked'
+    end
+
+    it "automatically unlocks a locked user account after one hour" do
+      user = user_create_confirmed email: 'user@example.com', password: 'password'
+
+      lock_time = Time.now
+
+      Timecop.freeze lock_time do
+        user.locked_at = Time.now
+        user.save!
+      end
+
+      Timecop.freeze(lock_time + 1.hour - 1.second) do
+        user.access_locked?.should be_true
+      end
+
+      Timecop.freeze(lock_time + 1.hour + 1.second) do
+        user.access_locked?.should be_false
+      end
     end
 
   end
@@ -49,8 +124,20 @@ describe "user registration process" do
     click_submit
   end
 
+  def change_email_address_to(email)
+    fill_in_email_with            email
+    fill_in_current_password_with session_default_user_password
+    click_update
+  end
+
   def visit_new_user_registration_page
     visit new_user_registration_path
+    page_should_be_loaded 'new-user-registration'
+  end
+
+  def visit_edit_user_registration_page(user)
+    visit edit_user_registration_path(user)
+    page_should_be_loaded 'edit-user-registration'
   end
 
   def fill_in_first_name_with(name)
@@ -73,22 +160,39 @@ describe "user registration process" do
     fill_in :user_password_confirmation, with: password
   end
 
+  def fill_in_current_password_with(password)
+    fill_in :user_current_password, with: password
+  end
+
   def click_submit
     elem = page.find '[data-test-button-submit]'
     elem.click
   end
 
-  def email_should_contain_confirmation_url(email)
-    email.should match confirmation_url_regex
+  def click_update
+    elem = page.find '[data-test-button-update]'
+    elem.click
   end
 
   def confirmation_path(email)
-    email =~ confirmation_url_regex
+    extract_path(email, confirmation_url_regexp)
+  end
+
+  def unlock_path(email)
+    extract_path(email, unlock_url_regexp)
+  end
+
+  def extract_path(email, regexp)
+    email.body.decoded =~ regexp
     $1
   end
 
-  def confirmation_url_regex
+  def confirmation_url_regexp
     %r{\"http:.+(/users/confirmation.*?)\"}  # do NOT include the http://hostname:port portion!
+  end
+
+  def unlock_url_regexp
+    %r{\"http:.+(/users/unlock.*?)\"}  # do NOT include the http://hostname:port portion!
   end
 
 end
