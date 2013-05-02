@@ -6,7 +6,7 @@ def session_sign_out
 end
 
 def session_sign_in
-  user = user_create
+  user = user_create_confirmed
   session_sign_in_as(user)
 end
 
