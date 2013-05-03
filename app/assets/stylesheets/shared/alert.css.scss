@@ -1,0 +1,18 @@
+@import "common";
+
+.alert {
+  margin: 0 0 0 0;
+
+  padding-top:    $application_top_nav_bottom_overhang;
+  padding-bottom: $application_top_nav_bottom_overhang;
+
+  -webkit-border-radius: 0;
+     -moz-border-radius: 0;
+          border-radius: 0;
+
+  .error-explanation {
+    ul {
+      padding-left: 30px;
+    }
+  }
+}

@@ -1,0 +1,3 @@
+<% self.now_global_alerts.each do |alert_info| %>
+  <%= render partial: "shared/alert", locals: { alert: alert_info } %>
+<% end %>

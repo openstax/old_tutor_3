@@ -17,7 +17,7 @@ describe "user registration and account management features" do
       register_as email: 'user@example.com'
 
       page_should_be_loaded 'home'
-      page_should_have_notice 'confirmation', 'user@example.com'
+      page_should_have_info_alert 'confirmation', 'user@example.com'
 
       email_deliveries.count.should eq 1
       email = email_deliveries.first
@@ -45,7 +45,7 @@ describe "user registration and account management features" do
       change_email_address_to 'newuser@example.com'
 
       page_should_be_loaded 'home'
-      page_should_have_notice 'confirmation', 'newuser@example.com'
+      page_should_have_info_alert 'confirmation', 'newuser@example.com'
 
       email_deliveries.count.should eq 1
       email = email_deliveries.first
@@ -70,14 +70,14 @@ describe "user registration and account management features" do
       8.times do
         session_sign_in_as user, password: 'not-the-password'
         page_should_be_loaded 'new-user-session'
-        page_should_have_alert 'invalid'
+        page_should_have_error_alert 'invalid'
         User.find(user_id).access_locked?.should be_false
       end
       session_sign_in_as user, password: 'not-the-password'
       page_should_be_loaded 'new-user-session'
 
       User.find(user_id).access_locked?.should be_true
-      page_should_have_alert 'locked'
+      page_should_have_error_alert 'locked'
 
       email_deliveries.count.should eq 1
       email = email_deliveries.first
@@ -87,7 +87,7 @@ describe "user registration and account management features" do
 
       visit unlock_path(email)
       page_should_be_loaded 'new-user-session'
-      page_should_have_notice 'unlocked'
+      page_should_have_info_alert 'unlocked'
     end
 
     it "automatically unlocks a locked user account after one hour" do

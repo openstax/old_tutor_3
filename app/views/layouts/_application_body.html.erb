@@ -3,14 +3,7 @@
 
 <div id="application-body">
 
-  <% unless notice.nil? %>
-    <p class="notice" data-test-notice><%= notice %></p>
-  <% end %>
-
-  <% unless alert.nil? %>
-    <p class="alert" data-test-alert><%= alert %></p>
-  <% end %>
-
   <%= yield :application_body %>
+
 </div>
 
