@@ -90,7 +90,12 @@ $account_bar_content_padding_tb: $application_top_nav_bottom_overhang;
     padding: 0px 3px 2px 3px;
   }
 
- .vertical-bar {
+  span.welcome-message {
+    margin-right: 10px;
+    color:        black;
+  }
+
+  .vertical-bar {
     @include vertical-bar-common;
     border-left-color: $ost_account_gray;
     width:      1px; 

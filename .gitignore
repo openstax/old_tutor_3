@@ -25,6 +25,9 @@ config/deploy_settings.yml
 # Ignore editor temp files
 *~
 
+# Ignore default ERD diagrams
+erd.pdf
+
 # Ignore Cucumber and RSpec failure information
 cucumber_rerun.txt
 rspec.failures

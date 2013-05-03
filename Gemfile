@@ -22,6 +22,7 @@ gem 'jquery-rails'
 gem 'thin'
 gem 'squeel'
 
+gem 'rails-erd'
 gem 'faker'
 
 gem 'attribeautiful', '0.0.6'
@@ -43,6 +44,7 @@ end
 group :development, :test do
   gem 'debugger', '~> 1.5.0'
   gem 'quiet_assets'
+  gem 'timecop'
 end
 
 group :development, :test do

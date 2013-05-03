@@ -1,3 +1,6 @@
+# Copyright 2011-2013 Rice University. Licensed under the Affero General Public 
+# License version 3 or later.  See the COPYRIGHT file for details.
+
 require 'spec_helper'
 
 def page_should_be_loaded(page_id)
@@ -8,10 +11,24 @@ def page_should_have_link(link_id)
   page.should have_css "a[data-test-link-#{link_id}]"
 end
 
-def page_should_have_notice(*patterns)
-  elem = page.find "[data-test-notice]"
+def page_should_have_error_alert(*patterns)
+  elem = page.find "[data-test-error-alert]"
+  page_match_elem_text(elem, *patterns)
+end
+
+def page_should_have_success_alert(*patterns)
+  elem = page.find "[data-test-success-alert]"
+  page_match_elem_text(elem, *patterns)
+end
+
+def page_should_have_info_alert(*patterns)
+  elem = page.find "[data-test-info-alert]"
+  page_match_elem_text(elem, *patterns)
+end
+
+def page_match_elem_text(elem, *patterns)
   patterns.each do |pattern|
-    elem.should have_text pattern
+    elem.text.should =~ regexp_case_insensitive(pattern)
   end
 end
 

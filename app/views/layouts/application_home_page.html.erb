@@ -6,6 +6,14 @@
 
 <% content_for :application_body do %>
 
+  <div id="application-home-page-global-alerts">
+    <%= render  partial: "shared/global_alerts" %>
+  </div>
+
+  <div id="application-home-page-local-alerts">
+    <%= render  partial: "shared/local_alerts" %>
+  </div>
+
   <div id="application-home-page-background-image" %>
     <%= render  :partial  => "layouts/application_account_bar", 
                 :locals   => { :icon_color => "white" } %>

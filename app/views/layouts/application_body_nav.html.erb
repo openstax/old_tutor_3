@@ -10,7 +10,15 @@
                   :locals   => { :icon_color => "gray" } %>
     </div>
 
+    <div id="application-body-nav-global-alerts">
+      <%= render  partial: "shared/global_alerts" %>
+    </div>
+
     <div id="application-body-nav-body-frame">
+      <div id="application-body-nav-local-alerts">
+        <%= render  partial: "shared/local_alerts" %>
+      </div>
+
       <div id="application-body-nav-body-content">
         <%= yield %>
       </div>
