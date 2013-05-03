@@ -1,3 +1,6 @@
+# Copyright 2011-2013 Rice University. Licensed under the Affero General Public 
+# License version 3 or later.  See the COPYRIGHT file for details.
+
 def user_create_confirmed(args={})
   email = args[:email] || session_default_user_email
 

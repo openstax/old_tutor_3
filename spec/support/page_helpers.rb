@@ -1,3 +1,6 @@
+# Copyright 2011-2013 Rice University. Licensed under the Affero General Public 
+# License version 3 or later.  See the COPYRIGHT file for details.
+
 require 'spec_helper'
 
 def page_should_be_loaded(page_id)

@@ -1,3 +1,6 @@
+# Copyright 2011-2013 Rice University. Licensed under the Affero General Public 
+# License version 3 or later.  See the COPYRIGHT file for details.
+
 def session_sign_out
   if page.has_css? session_sign_out_selector
     elem = page.find session_sign_out_selector
