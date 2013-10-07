@@ -40,8 +40,8 @@ Ost::Application.configure do
 
   ## Manually-added settings below ##
 
-  config.action_controller.default_url_options  = { :host => "localhost", :port => 3000 }
-  config.action_mailer.default_url_options      = { :host => 'localhost:3000' }
+  config.action_controller.default_url_options  = { :host => "localhost", :port => Rails::Server::DEV_PORT }
+  config.action_mailer.default_url_options      = { :host => "localhost:#{Rails::Server::DEV_PORT}" }
 
   ## see http://mailcatcher.me/
   config.action_mailer.delivery_method = :smtp

@@ -13,4 +13,9 @@ module ApplicationHelper
     options[:class] = klasses;
     options
   end
+
+  def page_heading(heading_text, options={})      
+    @page_title = heading_text
+    render 'shared/page_heading', page_heading: heading_text
+  end
 end

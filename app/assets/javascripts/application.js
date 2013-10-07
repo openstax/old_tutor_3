@@ -15,6 +15,9 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery-ui
 //= require_tree .
 //= require bootstrap
+
+
+// Currently not requiring (//= require jquery-ui) until we know we need it (https://github.com/joliss/jquery-ui-rails)
+

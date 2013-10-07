@@ -1,0 +1,5 @@
+@import "common";
+
+h1.fine_print {
+  @include page-heading;
+}

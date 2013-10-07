@@ -1,0 +1,9 @@
+@import "common";
+
+#page-heading {
+  @include page-heading;
+}
+
+div.not-full-width {
+  width: 600px;
+}
