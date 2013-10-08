@@ -1,25 +1,30 @@
 <%= page_heading "Welcome to #{SITE_NAME}" %>
 
 <div class="not-full-width">
-  <p>To create your account on OpenStax Tutor, please edit your profile and then review and accept our Terms of Use.</p>
-  <p>We <i>strongly suggest</i> that you list an email address below so that OpenStax Tutor can notify you of important events such as the release of assignments.</p>
+  <p>To create your account on OpenStax Tutor, please review and accept our 
+     Terms of Use, then click "Register".</p>
 </div>
 
-<%= render 'users/account' %>
-
 <%= lev_form_for :register, url: users_register_path, method: :put do |f| %>
-  <%= f.check_box :i_agree %> I have read 
-
-<% end %>
-
-<%= fine_print_dialog :width => 800, :height => 600 %>
-
-<% if false %>
-  <div style="padding-top:20px">
-  <%= check_box_tag(:agreement_checkbox) %> 
-  I have read the <%= link_to SiteLicense.latest.title, terms_path, :target => "_blank" %> 
+  <%= f.check_box :i_agree %> I have read the <%= link_to "Terms of Use", nil %> 
   and I agree to be bound by its terms.
-  </div>
-  
-  <div style="padding: 10px 0"><%= f.submit "Sign up", :id => 'register_submit', :class => "ui-state-default ui-state-disabled link_button" %></div>
+  <%= f.hidden_field :agreement_id, value: -1 %>
+  <%= f.submit "Register", id: "register_submit" %>
 <% end %>
+
+<% content_for :javascript do %>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      Tutor.Ui.disableButton('#register_submit');
+    })
+    $('#register_i_agree').on('click', function() {
+       if ($(this).is(':checked')) {
+         Tutor.Ui.enableButton('#register_submit');
+       } 
+       else {
+         Tutor.Ui.disableButton('#register_submit');
+       }
+    });
+  </script>
+<% end %>
+

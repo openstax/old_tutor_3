@@ -11,12 +11,11 @@ gem 'squeel'
 
 gem 'attribeautiful', '~> 0.0.6'
 
-gem 'openstax_connect', path: '/Users/jps/dev/openstax/connect-rails'
+gem 'openstax_connect', '~> 0.0.3'
 gem 'openstax_utilities', '~> 1.0.1'
 
-gem 'lev', "~> 2.0.1"
-# gem 'fine_print', "~> 0.1.1"
-gem 'fine_print', path: '/Users/jps/dev/fine_print'
+gem 'lev', "~> 2.0.2"
+gem 'fine_print', "~> 0.1.1"
 
 group :development, :test do
   gem 'sqlite3', '~> 1.3.6'

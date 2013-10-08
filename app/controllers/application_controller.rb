@@ -4,12 +4,26 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  include Lev::HandleWith
+
   before_filter :authenticate_user!
-  before_filter :restrict_to_users_in_good_standing!
+  before_filter :require_registration!
+  before_filter :require_agreement_to_terms!
 
 protected
 
-  def restrict_to_users_in_good_standing!
+  def require_registration!
     redirect_to users_registration_path if signed_in? && !current_user.is_registered?
+  end
+
+  def require_agreement_to_terms!
+    return if !signed_in?
+
+    true
+    # look through which terms user has agreed to, if out of date, redirect to that page
+    # (just go to the first one out of date, once agree, the next time in this method 
+    # will get the next one)
+    # do we need to track which agreements apply to which users?
+    # should there be an gem that just has the model stuff?  (do we get that without mounting?)
   end
 end

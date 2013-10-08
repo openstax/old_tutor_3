@@ -13,9 +13,12 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
+//= require tutor
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+//= require jquery.ui.button
+//= require jquery.ui.dialog
+//= require ui
 //= require bootstrap
 
 
