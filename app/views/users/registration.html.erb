@@ -1,0 +1,30 @@
+<%= page_heading "Welcome to #{SITE_NAME}" %>
+
+<div class="not-full-width">
+  <p>To create your account on OpenStax Tutor, please review and accept our 
+     Terms of Use, then click "Register".</p>
+</div>
+
+<%= lev_form_for :register, url: users_register_path, method: :put do |f| %>
+  <%= f.check_box :i_agree %> I have read the <%= link_to "Terms of Use", nil %> 
+  and I agree to be bound by its terms.
+  <%= f.hidden_field :agreement_id, value: -1 %>
+  <%= f.submit "Register", id: "register_submit" %>
+<% end %>
+
+<% content_for :javascript do %>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      Tutor.Ui.disableButton('#register_submit');
+    })
+    $('#register_i_agree').on('click', function() {
+       if ($(this).is(':checked')) {
+         Tutor.Ui.enableButton('#register_submit');
+       } 
+       else {
+         Tutor.Ui.disableButton('#register_submit');
+       }
+    });
+  </script>
+<% end %>
+

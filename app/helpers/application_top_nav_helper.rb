@@ -85,7 +85,7 @@ protected
     target_text           = text
     target_image          = options.fetch(:target_image, "")
     target_id             = "top-nav-#{text.downcase.tr(' ', '-')}-link"
-    target_path           = options.fetch(:target_path) { send("#{text.downcase.tr(' ', '_')}_page_path") }
+    target_path           = options.fetch(:target_path) { main_app.send("#{text.downcase.tr(' ', '_')}_page_path") }
     target_current_symbol = "top_nav_#{text.downcase.tr(' ', '_')}_current".to_sym
 
     render partial: partial,

@@ -2,46 +2,64 @@
 # License version 3 or later.  See the COPYRIGHT file for details.
 
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :token_authenticatable and :omniauthable
-  devise  :database_authenticatable,  ## See DeviseCreateUsers migration
-          :recoverable,               ## See DeviseCreateUsers migration
-          :rememberable,              ## See DeviseCreateUsers migration
-          :trackable,                 ## See DeviseCreateUsers migration
-          :confirmable,               ## See DeviseCreateUsers migration
-          :lockable,                  ## See DeviseCreateUsers migration
-          :registerable,
-          :timeoutable,
-          :validatable
+  
+  belongs_to :openstax_connect_user, 
+             class_name: "OpenStax::Connect::User"
 
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, 
-                  :password, :password_confirmation,
-                  :remember_me
+  delegate :username, :first_name, :last_name, :name, :casual_name,
+           to: :openstax_connect_user
 
-  attr_accessible :first_name, :last_name
+  scope :registered, where(is_registered: true)
+  scope :unregistered, where{is_registered != true}
 
-  VALID_EMAIL_REGEX = /\A[\w\.-]+@[\w-.]+\z/
-  validates :email, presence: true,
-                    length:   { minimum: 3, maximum: 320},
-                    format:   { with: VALID_EMAIL_REGEX }
-
-  VALID_NAME_REGEX = /\A[a-zA-Z]([-'a-zA-Z ]*[a-zA-Z])*?\z/
-  validates :first_name, presence: true, format: { with: VALID_NAME_REGEX }
-  validates :last_name,  presence: true, format: { with: VALID_NAME_REGEX }
-
-  def first_name=(name)
-    write_attribute :first_name, fixup_name(name)
+  def is_administrator?
+    is_administrator == true
   end
 
-  def last_name=(name)
-    write_attribute :last_name, fixup_name(name)
+  def is_registered?
+    is_registered == true
   end
 
-private
+  def is_anonymous?
+    is_anonymous == true
+  end
 
-  def fixup_name(name)
-    name.split.join(" ") unless name.nil?
+  #
+  # Anonymous User stuff
+  #
+
+  attr_accessor :is_anonymous
+
+  def self.anonymous
+    @@anonymous ||= AnonymousUser.new
+  end
+
+  class AnonymousUser < User
+    before_save { false } 
+    def initialize(attributes=nil)
+      super
+      self.is_anonymous          = true
+      self.is_registered         = false
+      self.openstax_connect_user = OpenStax::Connect::User.anonymous
+    end
+  end
+
+  #
+  # OpenStax Connect "user_provider" methods
+  #
+
+  def self.connect_user_to_app_user(connect_user)
+    return User.anonymous if connect_user.is_anonymous?
+
+    app_user = User.where(openstax_connect_user_id: connect_user.id).first ||
+               User.create do |user|
+                 user.openstax_connect_user_id = connect_user.id
+                 user.is_registered = false
+               end
+  end
+
+  def self.app_user_to_connect_user(app_user)
+    app_user.is_anonymous? ? OpenStax::Connect::User.anonymous : app_user.openstax_connect_user
   end
 
 end
