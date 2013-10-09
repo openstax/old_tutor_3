@@ -5,7 +5,8 @@
 <html>
 
   <head>
-
+    <%= csrf_meta_tags %>
+    
     <%= stylesheet_link_tag     "application" %>
     <%= javascript_include_tag  "application" %>
 
@@ -15,15 +16,17 @@
 
   <body>
 
-    <%= render :partial => "layouts/application_js_hooks" %>
+    <%= render "layouts/application_js_hooks" %>
+
+    <%= render "shared/upper_corner_console" %>
 
     <div id="application-container">
 
-      <%= render :partial => "layouts/application_header" %>
+      <%= render "layouts/application_header" %>
 
-      <%= render :partial => "layouts/application_body" %>
+      <%= render "layouts/application_body" %>
 
-      <%= render :partial => "layouts/application_footer" %>
+      <%= render "layouts/application_footer" %>
 
     </div>
 

@@ -26,4 +26,8 @@ protected
     # do we need to track which agreements apply to which users?
     # should there be an gem that just has the model stuff?  (do we get that without mounting?)
   end
+
+  def authenticate_admin!
+    raise SecurityTransgression unless signed_in? && current_user.is_administrator?
+  end
 end
