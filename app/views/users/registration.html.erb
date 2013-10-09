@@ -9,7 +9,7 @@
   <%= f.check_box :i_agree %> I have read the <%= link_to "Terms of Use", nil %> 
   and I agree to be bound by its terms.
   <%= f.hidden_field :agreement_id, value: -1 %>
-  <%= f.submit "Register", id: "register_submit" %>
+  <%= f.submit "Register", id: "register_submit", class: 'm-btn blue' %>
 <% end %>
 
 <% content_for :javascript do %>

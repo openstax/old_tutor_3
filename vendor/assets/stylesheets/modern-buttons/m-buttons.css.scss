@@ -302,8 +302,6 @@ input[type="search"]::-webkit-search-decoration, input[type="search"]::-webkit-s
 }
 .m-btn.red.disabled,
 .m-btn.red[disabled],
-.m-btn.blue.disabled,
-.m-btn.blue[disabled],
 .m-btn.purple.disabled,
 .m-btn.purple[disabled],
 .m-btn.green.disabled,
@@ -311,6 +309,13 @@ input[type="search"]::-webkit-search-decoration, input[type="search"]::-webkit-s
 {
 	opacity: .7;
 }
+
+.m-btn.blue.disabled,
+.m-btn.blue[disabled],
+{
+  opacity: .5;
+}
+
 
 .m-btn.black.disabled,
 .m-btn.black[disabled]
