@@ -1,0 +1,19 @@
+@import "common";
+
+#page-heading {
+  @include page-heading;
+}
+
+div.not-full-width {
+  width: 600px;
+}
+
+#upper-corner-console {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  #clock.highlight {
+    color: #ff00ff;
+  }
+}

@@ -18,4 +18,24 @@ module ApplicationHelper
     @page_title = heading_text
     render 'shared/page_heading', page_heading: heading_text
   end
+
+  def standard_date(datetime)
+    datetime.nil? ? "" : datetime.strftime(STANDARD_DATE_FORMAT)
+  end
+  
+  def standard_datetime(datetime)
+    datetime.nil? ? "" : datetime.strftime(STANDARD_DATETIME_FORMAT)
+  end
+  
+  def standard_time(datetime)
+    datetime.nil? ? "" : datetime.strftime(STANDARD_TIME_FORMAT)
+  end
+  
+  def standard_datetime_zone(datetime, zone)
+    datetime.nil? ? "" : datetime.in_time_zone(zone).strftime(STANDARD_DATETIME_FORMAT)
+  end
+  
+  def month_year(datetime)
+    datetime.nil? ? "" : datetime.strftime("%B %Y")
+  end
 end
