@@ -1,0 +1,5 @@
+if ($('#dev_toolbox_dialog').exists()) { $('#dev_toolbox_dialog').remove(); }
+
+$("body").append("<%= j(render :partial => 'toolbox_dialog') %>");
+
+$('#dev_toolbox_dialog').modal({}).center();

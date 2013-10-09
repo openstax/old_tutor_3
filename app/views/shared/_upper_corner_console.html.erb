@@ -4,20 +4,9 @@
     <%= link_to "Admin Console", admin_path %><br/>
   <% end %>
 
-  <% if !Rails.env.production? && false %>
+  <% if !Rails.env.production? %>
     Current user: <%= current_user.username %><br/>
-    <%= link_to "Dev Toolbox", dev_toolbox_path, :remote => true %>
-    <div id="dev_toolbox_dialog" style="display:none" title="Dev Toolbox"></div>
-    <% content_for :javascript do %>
-      <%= javascript_tag do %>
-        $("#dev_toolbox_dialog").dialog({ 
-            autoOpen: false, 
-            modal: true, 
-            height:500, 
-            width:700
-        });
-      <% end %>
-    <% end %>
+    <%= link_to "Dev Console", dev_path, :remote => true %><br/>
   <% end %>
 
   <% clock_is_normally_enabled = @clock_enabled && signed_in? %>

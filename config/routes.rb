@@ -28,4 +28,8 @@ Ost::Application.routes.draw do
   get "admin/raise_not_yet_implemented",    :to => 'admin#raise_not_yet_implemented'
   get "admin/raise_illegal_argument",       :to => 'admin#raise_illegal_argument'
 
+  namespace 'dev' do
+    get "/", to: 'base#index'
+  end
+
 end

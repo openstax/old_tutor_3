@@ -6,7 +6,6 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.14'
 
 gem 'jquery-rails'
-gem 'jquery-ui-rails'
 gem 'squeel'
 
 gem 'attribeautiful', '~> 0.0.6'
@@ -28,9 +27,9 @@ group :development, :test do
   gem 'timecop'
 
   gem 'rspec-rails'
-  gem 'capybara', '<2.1.0'  ## see: https://github.com/thoughtbot/capybara-webkit/issues/507
-  gem 'capybara-screenshot'
-  gem 'capybara-webkit'
+  # gem 'capybara', '<2.1.0'  ## see: https://github.com/thoughtbot/capybara-webkit/issues/507
+  # gem 'capybara-screenshot'
+  # gem 'capybara-webkit'
   gem 'database_cleaner'
 end
 
