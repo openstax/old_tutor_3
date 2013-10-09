@@ -1,0 +1,95 @@
+// Copyright 2011-2012 Rice University. Licensed under the Affero General Public 
+// License version 3 or later.  See the COPYRIGHT file for details.
+
+jQuery.fn.exists = function(){return jQuery(this).length>0;}
+
+jQuery.fn.centerVertically = function() {
+  return $(this).css({
+    top: '50%',
+    'margin-top': function () { return -($(this).height() / 2); }
+  });
+}
+
+jQuery.fn.centerHorizontally = function() {
+  return $(this).css({
+    left: '50%',
+    'margin-left': function () { return -($(this).width() / 2); }
+  });
+}
+
+jQuery.fn.center = function() {
+  $(this).centerHorizontally();
+  $(this).centerVertically();
+}
+
+jQuery.fn.pageTimeout = function(options) {
+   var default_options = {
+      timeTilDialog: 29*60*1000,
+      timeAfterDialog: 1*60*1000,
+	}
+    
+   var config = $.extend(default_options, options);
+   var preDialogTimeout, postDialogTimeout;
+   
+   auto_signout = false;
+    
+    var resetTimeouts = function() {
+       clearTimeout(preDialogTimeout);
+       clearTimeout(postDialogTimeout);
+       
+       preDialogTimeout = setTimeout(openTimeoutDialog, config.timeTilDialog);
+    }
+    
+    var openTimeoutDialog = function() {
+       postDialogTimeout = setTimeout(signout, config.timeAfterDialog);
+       
+       timeoutDialog = "<div id='timeout_dialog'><p>You are about to be signed out due to inactivity!</p></div>";
+       
+       $(timeoutDialog).dialog({
+          buttons: {
+             "I\'m still here!": function() {
+                resetTimeouts();
+                $(this).dialog("close");
+             }
+          },
+          modal:true,
+          title:"Attention!"
+       });
+       
+       $("#timeout_dialog").bind('dialogclose', function(event, ui) {
+           resetTimeouts();
+       });
+    }
+    
+    var signout = function() {
+       auto_signout = true;
+       $(document).trigger('beforeTimeout');
+       $('#signout_link').click();
+    }
+    
+    return jQuery(this).each(function() {
+       resetTimeouts();
+       $(document).bind('click', resetTimeouts);
+    });
+ }
+
+jQuery.fn.closeOnClickOutside = function(){
+  var dialogx = this;
+  $('.ui-widget-overlay').live("click",function(){
+    dialogx.dialog("close");
+  });
+}
+
+// http://james.padolsey.com/javascript/regex-selector-for-jquery/
+jQuery.expr[':'].regex = function(elem, index, match) {
+  var matchParams = match[3].split(','),
+      validLabels = /^(data|css):/,
+      attr = {
+          method: matchParams[0].match(validLabels) ? 
+                      matchParams[0].split(':')[0] : 'attr',
+          property: matchParams.shift().replace(validLabels,'')
+      },
+      regexFlags = 'ig',
+      regex = new RegExp(matchParams.join('').replace(/^\s+|\s+$/g,''), regexFlags);
+  return regex.test(jQuery(elem)[attr.method](attr.property));
+}

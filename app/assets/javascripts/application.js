@@ -16,10 +16,10 @@
 //= require tutor
 //= require jquery
 //= require jquery_ujs
-//= require jquery.ui.button
-//= require jquery.ui.dialog
 //= require ui
 //= require bootstrap
+//= require modern-buttons
+//= require jquery_extensions
 
 
 // Currently not requiring (//= require jquery-ui) until we know we need it (https://github.com/joliss/jquery-ui-rails)
