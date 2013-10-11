@@ -38,7 +38,7 @@ input[type="tel"].m-wrap,
 input[type="color"].m-wrap,
 .m-uneditable-input 
 {
-	vertical-align: top;
+	vertical-align: baseline;
 	display: inline-block;
 	height: 20px;
 	padding: 6px 6px;

@@ -49,13 +49,7 @@ class User < ActiveRecord::Base
   #
 
   def self.connect_user_to_app_user(connect_user)
-    return anonymous if connect_user.is_anonymous?
-
-    app_user = where(openstax_connect_user_id: connect_user.id).first ||
-               create do |user|
-                 user.openstax_connect_user_id = connect_user.id
-                 user.is_registered = false
-               end
+    GetOrCreateUserFromConnectUser.call(connect_user).outputs.user
   end
 
   def self.app_user_to_connect_user(app_user)

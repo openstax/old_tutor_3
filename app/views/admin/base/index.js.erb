@@ -1,0 +1,5 @@
+if ($('#admin_console_dialog').exists()) { $('#admin_console_dialog').remove(); }
+
+$("#application-body").append("<%= j(render :partial => 'console_dialog') %>");
+
+$('#admin_console_dialog').modal({}).center();

@@ -1,12 +1,7 @@
-<%# Copyright 2011-2012 Rice University. Licensed under the Affero General Public 
-    License version 3 or later.  See the COPYRIGHT file for details. %>
-
-<%= page_heading "Administrator's Console" %>
-
-<ul>
-  <li><%= link_to "Run cron tasks", cron_path, :method => :put, :test => "run_cron_tasks" %></li>
+<ul class="normal">
+  <li><%= link_to "Run cron tasks", admin_cron_path, :method => :put, :test => "run_cron_tasks" %></li>
   <li>Raise an Exception:
-    <ul>
+    <ul class="normal">
       <li><%= link_to "SecurityTransgression",                admin_raise_security_transgression_path %></li>
       <li><%= link_to "ActiveRecord::RecordNotFound",         admin_raise_record_not_found_path %></li>
       <li><%= link_to "ActionController::RoutingError",       admin_raise_routing_error_path %></li>

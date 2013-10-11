@@ -10,8 +10,8 @@ gem 'squeel'
 
 gem 'attribeautiful', '~> 0.0.6'
 
-gem 'openstax_connect', '~> 0.0.4'
-gem 'openstax_utilities', '~> 1.0.1'
+gem 'openstax_connect', '~> 0.0.5'
+gem 'openstax_utilities', '~> 1.0.2'
 
 gem 'lev', "~> 2.0.2"
 gem 'fine_print', "~> 0.1.1"
@@ -27,10 +27,12 @@ group :development, :test do
   gem 'timecop'
 
   gem 'rspec-rails'
+  gem 'database_cleaner'
+
+  # Commenting out until we need it -- also commenting out in spec_helper
   # gem 'capybara', '<2.1.0'  ## see: https://github.com/thoughtbot/capybara-webkit/issues/507
   # gem 'capybara-screenshot'
   # gem 'capybara-webkit'
-  gem 'database_cleaner'
 end
 
 group :production do

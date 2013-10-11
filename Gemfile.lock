@@ -105,13 +105,13 @@ GEM
     omniauth-oauth2 (1.1.1)
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
-    openstax_connect (0.0.4)
+    openstax_connect (0.0.5)
       lev (~> 2.0.1)
       omniauth (~> 1.1)
       omniauth-oauth2 (~> 1.1.1)
       rails (~> 3.2.13)
       squeel
-    openstax_utilities (1.0.1)
+    openstax_utilities (1.0.2)
       attribeautiful (~> 0.0.7)
       rails (>= 3.1)
     polyamorous (0.6.4)
@@ -210,8 +210,8 @@ DEPENDENCIES
   jquery-rails
   lev (~> 2.0.2)
   mysql2 (~> 0.3.11)
-  openstax_connect (~> 0.0.4)
-  openstax_utilities (~> 1.0.1)
+  openstax_connect (~> 0.0.5)
+  openstax_utilities (~> 1.0.2)
   quiet_assets
   rails (= 3.2.14)
   rails-erd
