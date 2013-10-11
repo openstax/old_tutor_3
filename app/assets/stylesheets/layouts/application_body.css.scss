@@ -10,7 +10,8 @@
     margin-bottom: 12px;
   }
 
-  ul {
+  // Sometimes UL's are used not as bulleted lists
+  ul.normal {
     margin-left: 25px;
   }
 }

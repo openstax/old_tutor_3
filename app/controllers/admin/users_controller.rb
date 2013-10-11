@@ -1,9 +1,9 @@
-module Dev
+module Admin
   class UsersController < BaseController
 
     def search
       handle_with(Admin::UsersSearch,
-                  complete: lambda { render 'admin/users/search' })
+                  complete: lambda { render 'search' })
     end
 
   end

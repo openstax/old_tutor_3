@@ -1,26 +1,29 @@
-<div id="dev_toolbox_dialog" 
+<div id="admin_console_dialog" 
      class="modal hide" 
      style="width:800px; min-height: 400px"
      tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">Dev Console</h3>
+    <h3 id="myModalLabel">Admin Console</h3>
   </div>
 
   <div class="modal-body">
 
+    <div id="dialog-local-alerts"></div>
+
     <ul class="nav nav-tabs">
-      <li class="active"><a href="#users-tab" data-toggle="tab">Users</a></li>
-      <li><a href="#time-tab" data-toggle="tab">Time</a></li>
+      <li class="active"><a href="#misc-tab" data-toggle="tab">Misc</a></li>
+      <li><a href="#users-tab" data-toggle="tab">Users</a></li>
     </ul>
 
     <div class="tab-content">
-      <div class="tab-pane active" id="users-tab">
-        Users
+      <div class="tab-pane active" id="misc-tab">
+        <%= render 'misc' %>
       </div>
-      <div class="tab-pane" id="time-tab">
-        Time stuff
+
+      <div class="tab-pane" id="users-tab">
+        <%= render 'users' %>
       </div>
     </div>
     

@@ -7,8 +7,8 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
 
-require 'capybara/rspec'
-require 'capybara-screenshot/rspec'
+# require 'capybara/rspec'
+# require 'capybara-screenshot/rspec'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -43,22 +43,22 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 
-  # Test capybara that we always want a javascript-capable driver.
-  # Webkit is a headless, javascript-capable browser.
-  # Selenium drives an actual Firefox browser.
-  Capybara.javascript_driver = :webkit
-  Capybara.default_driver    = :webkit
-  # Capybara.javascript_driver = :selenium
-  # Capybara.default_driver    = :selenium
+  # # Test capybara that we always want a javascript-capable driver.
+  # # Webkit is a headless, javascript-capable browser.
+  # # Selenium drives an actual Firefox browser.
+  # Capybara.javascript_driver = :webkit
+  # Capybara.default_driver    = :webkit
+  # # Capybara.javascript_driver = :selenium
+  # # Capybara.default_driver    = :selenium
 
-  Capybara.default_selector = :css
+  # Capybara.default_selector = :css
   
-  # Turn off automatic screencapture when scenario fails
-  Capybara::Screenshot.autosave_on_failure = false
+  # # Turn off automatic screencapture when scenario fails
+  # Capybara::Screenshot.autosave_on_failure = false
 
-  # This causes capybara #has_css? and #find selectors to return quickly
-  # in the event of a failure
-  Capybara.default_wait_time = 0.01;
+  # # This causes capybara #has_css? and #find selectors to return quickly
+  # # in the event of a failure
+  # Capybara.default_wait_time = 0.01;
 
   ###########################################################
   # FORCE ALL THREADS TO SHARE ONE CONNECTION TO THE DATABASE
