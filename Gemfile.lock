@@ -78,7 +78,7 @@ GEM
     json (1.8.0)
     jwt (0.1.8)
       multi_json (>= 1.5)
-    lev (2.0.2)
+    lev (2.0.4)
       actionpack (>= 3.0)
       active_attr
       activemodel (>= 3.0)
@@ -191,7 +191,7 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    tzinfo (0.3.37)
+    tzinfo (0.3.38)
     uglifier (2.2.1)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
@@ -208,7 +208,7 @@ DEPENDENCIES
   faker
   fine_print (~> 0.1.1)
   jquery-rails
-  lev (~> 2.0.2)
+  lev (~> 2.0.4)
   mysql2 (~> 0.3.11)
   openstax_connect (~> 0.0.5)
   openstax_utilities (~> 1.0.2)

@@ -13,7 +13,7 @@ gem 'attribeautiful', '~> 0.0.6'
 gem 'openstax_connect', '~> 0.0.5'
 gem 'openstax_utilities', '~> 1.0.2'
 
-gem 'lev', "~> 2.0.2"
+gem 'lev', "~> 2.0.4"
 gem 'fine_print', "~> 0.1.1"
 
 group :development, :test do

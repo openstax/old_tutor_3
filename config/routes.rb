@@ -26,6 +26,8 @@ Ost::Application.routes.draw do
 
     namespace 'users' do
       post 'search'
+      post 'create'
+      post 'generate'
     end
   end
 
