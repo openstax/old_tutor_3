@@ -40,15 +40,21 @@ module ApplicationHelper
   end
 
   def unless_errors(options={}, &block)
-    options[:errors] ||= @handler_result.errors.collect{|e| e.translate}
-    options[:errors_html_id] ||= 'local-alerts'
-    options[:errors_partial] ||= 'shared/local_alerts'
-    options[:trigger] ||= 'errors-added'
-
-    if options[:errors].any? || flash[:alert]
-      "$('##{options[:errors_html_id]}').html('#{ j(render options[:errors_partial], errors: options[:errors]) }').trigger('#{options[:trigger]}');".html_safe
-    else
-      ("$('##{options[:errors_html_id]}').html('');" + capture(&block)).html_safe
+    errors = @handler_result.errors.each do |error|
+      add_local_error_alert now: true, content: error.translate
     end
+
+    @handler_result.errors.any? ?
+      js_refresh_alerts(options) : 
+      js_refresh_alerts(options) + capture(&block).html_safe
   end
+
+  def js_refresh_alerts(options={})
+    options[:alerts_html_id] ||= 'local-alerts'
+    options[:alerts_partial] ||= 'shared/local_alerts'
+    options[:trigger] ||= 'alerts-updated'    
+
+    "$('##{options[:alerts_html_id]}').html('#{ j(render options[:alerts_partial]) }').trigger('#{options[:trigger]}');".html_safe
+  end
+
 end

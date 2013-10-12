@@ -3,19 +3,17 @@
      style="width:800px; min-height: 400px"
      tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
-  <div class="modal-header">
+  <div class="modal-header" style="border-bottom: none">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">Admin Console</h3>
+    <ul class="nav nav-tabs tight-bottom">
+      <li class="active"><a href="#misc-tab" data-toggle="tab">Misc</a></li>
+      <li><a href="#users-tab" data-toggle="tab">Users</a></li>
+    </ul>
   </div>
 
   <div class="modal-body">
 
     <div id="dialog-local-alerts"></div>
-
-    <ul class="nav nav-tabs">
-      <li class="active"><a href="#misc-tab" data-toggle="tab">Misc</a></li>
-      <li><a href="#users-tab" data-toggle="tab">Users</a></li>
-    </ul>
 
     <div class="tab-content">
       <div class="tab-pane active" id="misc-tab">
@@ -29,10 +27,4 @@
     
   </div>
 
-<% if false %>
-  <div class="modal-footer">
-    <button class="m-btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <button class="m-btn blue btn-primary">Save changes</button>
-  </div>
-<% end %>
 </div>

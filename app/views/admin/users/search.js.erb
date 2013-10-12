@@ -1,4 +1,4 @@
-<%= unless_errors errors_html_id: 'dialog-local-alerts' do %>
+<%= unless_errors alerts_html_id: 'dialog-local-alerts' do %>
   <% contents = osu.action_list(             
        records: @handler_result.outputs[:users],
        list: {

@@ -4,13 +4,6 @@
 <% convert_flash_alert %>
 <% convert_flash_notice %>
 
-<%
-  # If caller rendering this partial passed in errors, use them.
-  (errors ||= []).each do |error|
-    add_local_error_alert now: true, content: error
-  end
-%>
-
 <% self.now_local_alerts.each do |alert_info| %>
   <%= render partial: "shared/alert", locals: { alert: alert_info } %>
 <% end %>
